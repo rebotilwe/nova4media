@@ -38,7 +38,7 @@ function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="logo">
-          PHOTIA<span>.</span>
+          NOVA<span>.</span>
         </Link>
 
         {/* Desktop Nav */}
