@@ -11,21 +11,18 @@ function Layout() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading of all resources
     const handleLoad = () => {
       setTimeout(() => {
         setIsLoading(false);
-      }, 1500); // Minimum 1.5 seconds for better UX
+      }, 1500);
     };
 
-    // If page is already loaded
     if (document.readyState === 'complete') {
       handleLoad();
     } else {
       window.addEventListener('load', handleLoad);
     }
 
-    // Fallback timeout
     const timeout = setTimeout(() => {
       setIsLoading(false);
     }, 4000);
@@ -38,10 +35,8 @@ function Layout() {
 
   return (
     <div className="app-layout">
-      {/* Preloader - Shows first */}
       <Preloader isLoading={isLoading} />
       
-      {/* Main Content - Shows after preloader */}
       <div className={`main-content ${isLoading ? 'loading' : 'loaded'}`}>
         <ContactBar />
         <Navbar />

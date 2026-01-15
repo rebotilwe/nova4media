@@ -1,8 +1,6 @@
-/* components/ContactBar/ContactBar.css */
-
 .contact-bar-wrapper {
   position: fixed;
-  top: 14px;
+  top: 16px;
   left: 0;
   right: 0;
   z-index: 1100;
@@ -15,38 +13,56 @@
   pointer-events: auto;
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 10px 26px;
-  background: #ffffff;
+  gap: 22px;
+  padding: 10px 30px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
   border-radius: 999px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
   font-family: "Inter", system-ui, sans-serif;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   color: #111;
+  animation: floatIn 0.8s ease forwards;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .promo-text {
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
 }
 
 .divider {
   width: 1px;
   height: 18px;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .contact-item {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   color: #111;
   white-space: nowrap;
+  transition: 0.25s ease;
+}
+
+.contact-item:hover {
+  color: var(--accent);
 }
 
 .contact-item svg {
-  color: #9cff00; /* Photia green */
+  color: var(--accent);
   font-size: 15px;
 }
 

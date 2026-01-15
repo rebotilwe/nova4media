@@ -559,3 +559,160 @@
     font-size: 30vw;
   }
 }
+/* ================================
+   RESPONSIVE IMPROVEMENTS
+================================ */
+
+/* Large desktops / ultrawide */
+@media (min-width: 1600px) {
+  .slide-title {
+    font-size: 6.5rem;
+  }
+
+  .content-wrapper {
+    max-width: 1000px;
+  }
+
+  .slide-content {
+    padding: 0 12%;
+  }
+}
+
+/* Laptops / small desktops */
+@media (max-width: 1200px) {
+  .slide-title {
+    font-size: 4.2rem;
+  }
+
+  .slide-content {
+    padding: 0 8%;
+  }
+
+  .background-text {
+    font-size: 18vw;
+  }
+}
+
+/* Tablets (iPad / Nest Hub landscape) */
+@media (max-width: 1024px) {
+  .slide-title {
+    font-size: 3.5rem;
+  }
+
+  .slide-subtitle {
+    font-size: 1.15rem;
+  }
+
+  .slide-content {
+    padding: 0 6%;
+  }
+
+  .slide-sidebar {
+    display: none;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Nest Hub portrait + small tablets */
+@media (max-width: 900px) {
+  .hero-slider-enhanced {
+    height: 90vh;
+  }
+
+  .background-text {
+    font-size: 26vw;
+  }
+
+  .scroll-indicator-enhanced {
+    bottom: 20px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 600px) {
+  .hero-slider-enhanced {
+    height: 85vh;
+  }
+
+  .slide-title {
+    font-size: 2.4rem;
+    line-height: 1.2;
+  }
+
+  .slide-pre-title {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+  }
+
+  .slide-subtitle {
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
+
+  .content-wrapper {
+    max-width: 100%;
+  }
+
+  .slide-content {
+    padding: 0 5%;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn-magnetic,
+  .btn-outline-magnetic {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+
+  .background-text {
+    font-size: 32vw;
+  }
+
+  .scroll-indicator-enhanced {
+    display: none;
+  }
+
+  .swiper-pagination-bullet {
+    width: 40px;
+    height: 40px;
+  }
+
+  .bullet-inner {
+    font-size: 0.75rem;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .slide-title {
+    font-size: 2rem;
+  }
+
+  .slide-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+/* Touch devices optimization */
+@media (hover: none) {
+  .custom-cursor {
+    display: none;
+  }
+
+  .btn-magnetic:hover,
+  .btn-outline-magnetic:hover {
+    transform: none;
+  }
+}
