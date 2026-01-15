@@ -1,0 +1,38 @@
+/* Layered image positions */
+.image-grid .grid-item {
+  position: absolute;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 120px;
+  height: 120px;
+  transition: transform 0.5s ease;
+}
+
+.image-grid .grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-grid .grid-item:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+/* Scroll animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.fade-up.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stats numbers animated by JS */
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #111;
+}

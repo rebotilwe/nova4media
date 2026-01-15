@@ -1,0 +1,58 @@
+/* components/ContactBar/ContactBar.css */
+
+.contact-bar-wrapper {
+  position: fixed;
+  top: 14px;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.contact-pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 10px 26px;
+  background: #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111;
+}
+
+.promo-text {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #111;
+  white-space: nowrap;
+}
+
+.contact-item svg {
+  color: #9cff00; /* Photia green */
+  font-size: 15px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .contact-pill {
+    display: none;
+  }
+}
