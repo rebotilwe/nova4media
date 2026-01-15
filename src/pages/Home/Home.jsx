@@ -1,4 +1,5 @@
-import HeroSlider from "../../components/HeroSlider/HeroSlider";
+
+import HeroSlider from "../../components/HeroSlider/HeroSlider"
 import Services from "../../pages/Services/Services";
 import Achievements from "../../pages/Achievements/Achievements";
 import Team from "../../components/Team/Team";
@@ -10,11 +11,11 @@ function Home() {
   return (
     <div className="home-page">
       <HeroSlider />
-      <RecentProjects/>
+      {/* <RecentProjects/>
       <Services />
       <Testimonials />
       <Team />
-      <Achievements />
+      <Achievements /> */}
       {/* You'll add more sections here later */}
     </div>
   );
