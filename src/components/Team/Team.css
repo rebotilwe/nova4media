@@ -1,17 +1,69 @@
-/* components/Team/Team.css */
+/* ------------------------------
+  Team Section
+-------------------------------- */
 .team-section {
   padding: 100px 0;
-  background: #f8fafc;
+  background: #0f172a; /* Dark background for contrast */
+  color: #fff;
   position: relative;
   overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  z-index: 1;
 }
 
+/* Floating Background Shapes */
+.team-section::before,
+.team-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.05;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Top-left floating circle */
+.team-section::before {
+  width: 250px;
+  height: 250px;
+  top: -50px;
+  left: -50px;
+  background: radial-gradient(circle, #4a6fa8 0%, transparent 70%);
+  animation: floatShape1 30s linear infinite;
+}
+
+/* Bottom-right floating circle */
+.team-section::after {
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  right: -80px;
+  background: radial-gradient(circle, #6b93d6 0%, transparent 70%);
+  animation: floatShape2 40s linear infinite reverse;
+}
+
+/* Floating Animations */
+@keyframes floatShape1 {
+  0% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(50px,-30px) rotate(180deg); }
+  100% { transform: translate(0,0) rotate(360deg); }
+}
+
+@keyframes floatShape2 {
+  0% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(-40px,20px) rotate(180deg); }
+  100% { transform: translate(0,0) rotate(360deg); }
+}
+
+/* ------------------------------
+  Container
+-------------------------------- */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
   position: relative;
-  z-index: 2;
+  z-index: 2; /* Keep content above floating shapes */
 }
 
 /* Section Header */
@@ -33,100 +85,168 @@
 .section-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #111;
+  color: #fff;
   line-height: 1.2;
   max-width: 800px;
   margin: 0 auto 20px;
 }
 
+.section-title .accent {
+  color: #4a6fa8;
+}
+
 .section-description {
   font-size: 1.1rem;
-  color: #666;
+  color: #cbd5e1;
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
 }
 
-/* Team Placeholder */
-.team-placeholder {
-  background: white;
-  border-radius: 20px;
-  padding: 50px;
-  text-align: center;
-  margin-bottom: 80px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-  border: 1px solid #f0f0f0;
+/* ------------------------------
+  Team Carousel
+-------------------------------- */
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.placeholder-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.placeholder-icon {
-  font-size: 4rem;
-  margin-bottom: 20px;
-}
-
-.team-placeholder h3 {
-  font-size: 1.8rem;
-  color: #111;
-  margin-bottom: 15px;
-}
-
-.team-placeholder p {
-  color: #666;
-  margin-bottom: 40px;
-}
-
-.placeholder-members {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+.team-carousel {
+  display: flex;
+  overflow-x: auto;
   gap: 30px;
-  margin-top: 40px;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.team-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.team-carousel::-webkit-scrollbar-thumb {
+  background: #4a6fa8;
+  border-radius: 4px;
 }
 
 .member-card {
+  min-width: 220px;
+  scroll-snap-align: start;
   text-align: center;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  z-index: 2;
 }
 
+.member-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Member Avatar */
 .member-avatar {
+  position: relative;
   width: 120px;
   height: 120px;
   margin: 0 auto 15px;
-  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
   border-radius: 50%;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.member-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.member-card:hover .member-avatar {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(74,111,168,0.3);
+}
+
+/* Social Overlay on Hover */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(74,111,168,0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-}
-
-.avatar-placeholder {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, #4a6fa8, #6b93d6);
-  opacity: 0.2;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
   border-radius: 50%;
+  z-index: 3;
 }
 
+.member-card:hover .overlay {
+  opacity: 1;
+}
+
+.overlay a {
+  color: #fff;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.overlay a:hover {
+  transform: scale(1.2);
+}
+
+/* Member Info */
 .member-info h4 {
   font-size: 1.1rem;
-  color: #111;
+  color: #fff;
   margin-bottom: 5px;
 }
 
 .member-info p {
   font-size: 0.9rem;
-  color: #666;
+  color: #cbd5e1;
   margin: 0;
 }
 
-/* Clients Section */
+/* Carousel Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(74,111,168,0.8);
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5;
+  transition: background 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background: #4a6fa8;
+}
+
+.carousel-arrow.left { left: -20px; }
+.carousel-arrow.right { right: -20px; }
+
+/* ------------------------------
+  Clients Section
+-------------------------------- */
 .clients-section {
   text-align: center;
   padding-top: 50px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid rgba(203,213,225,0.2);
 }
 
 .clients-title {
@@ -147,82 +267,44 @@
 
 .client-logo {
   height: 80px;
-  background: white;
+  background: rgba(255,255,255,0.05);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(203,213,225,0.2);
   transition: all 0.3s ease;
 }
 
 .client-logo:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(74,111,168,0.2);
   border-color: #4a6fa8;
 }
 
 .logo-placeholder {
-  color: #94a3b8;
+  color: #cbd5e1;
   font-weight: 600;
 }
 
-/* Responsive Design */
+/* ------------------------------
+  Responsive
+-------------------------------- */
 @media (max-width: 992px) {
-  .team-section {
-    padding: 80px 0;
-  }
-  
-  .section-title {
-    font-size: 2.2rem;
-  }
-  
-  .team-placeholder {
-    padding: 40px 30px;
-  }
+  .team-section { padding: 80px 0; }
+  .section-title { font-size: 2.2rem; }
+  .member-card { min-width: 200px; }
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 0 20px;
-  }
-  
-  .section-title {
-    font-size: 1.9rem;
-  }
-  
-  .placeholder-members {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .clients-logos {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .container { padding: 0 20px; }
+  .section-title { font-size: 1.9rem; }
+  .team-carousel { gap: 20px; }
 }
 
 @media (max-width: 576px) {
-  .team-section {
-    padding: 60px 0;
-  }
-  
-  .section-title {
-    font-size: 1.7rem;
-  }
-  
-  .team-placeholder {
-    padding: 30px 20px;
-  }
-  
-  .placeholder-members {
-    grid-template-columns: 1fr;
-  }
-  
-  .clients-logos {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  .client-logo {
-    height: 70px;
-  }
+  .team-section { padding: 60px 0; }
+  .section-title { font-size: 1.7rem; }
+  .member-card { min-width: 180px; padding: 15px; }
+  .client-logo { height: 70px; }
 }

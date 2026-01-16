@@ -1,11 +1,510 @@
-.home-page {
-  width: 100%;
+/* Home.css - COMPLETE UPDATED VERSION */
+
+:root {
+  --accent-color: #9cff00;
+  --accent-rgb: 156, 255, 0;
+  --text-light: #ffffff;
+  --text-dark: #111111;
+  --bg-dark: #000000;
+  --bg-light: #0a0a0a;
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --glass-bg: rgba(10, 10, 10, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-/* Ensure hero slider takes full viewport */
-.hero-slider {
+/* Home Page Container */
+.home-page {
+  width: 100%;
+  position: relative;
+  background: var(--bg-dark);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Floating Background Shapes */
+.floating-shapes {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.1;
+  animation: floatShape 25s infinite ease-in-out;
+}
+
+.shape-1 {
+  width: min(500px, 40vw);
+  height: min(500px, 40vw);
+  top: 10%;
+  left: -250px;
+  background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+}
+
+.shape-2 {
+  width: min(400px, 35vw);
+  height: min(400px, 35vw);
+  bottom: 20%;
+  right: -200px;
+  background: radial-gradient(circle, rgba(74, 111, 168, 1) 0%, transparent 70%);
+  animation-delay: -5s;
+}
+
+.shape-3 {
+  width: min(300px, 30vw);
+  height: min(300px, 30vw);
+  top: 60%;
+  left: 20%;
+  background: radial-gradient(circle, rgba(231, 76, 60, 1) 0%, transparent 70%);
+  animation-delay: -10s;
+}
+
+@keyframes floatShape {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(100px, -50px) scale(1.1);
+  }
+  50% {
+    transform: translate(-50px, 100px) scale(0.9);
+  }
+  75% {
+    transform: translate(-100px, -100px) scale(1.05);
+  }
+}
+
+/* Hero Section - NO GAP */
+.hero-section {
   width: 100%;
   height: 100vh;
-  min-height: 600px;
+  min-height: 500px;
+  max-height: 1200px;
   position: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Section Wrapper - UPDATED for NO GAPS */
+.section-wrapper {
+  position: relative;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: var(--transition-slow);
+  margin: 0;
+  padding: 0;
+}
+
+.section-wrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Special handling for first section after hero */
+.projects-section.section-wrapper {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Add smooth transition between sections */
+.section-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(156, 255, 0, 0.3), transparent);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+/* Projects Section Specific - NO GAP from Hero */
+.projects-section {
+  background: #050505;
+  padding-bottom: clamp(60px, 8vw, 120px) !important;
+  position: relative;
+  z-index: 2;
+}
+
+/* Background Gradients */
+.background-gradients {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+  top: 0;
+  left: 0;
+}
+
+.gradient {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.05;
+}
+
+.gradient-1 {
+  width: min(800px, 70vw);
+  height: min(800px, 70vw);
+  top: -400px;
+  left: -400px;
+  background: var(--accent-color);
+}
+
+.gradient-2 {
+  width: min(600px, 60vw);
+  height: min(600px, 60vw);
+  bottom: -300px;
+  right: -300px;
+  background: rgba(74, 111, 168, 1);
+}
+
+/* Section Header Styles */
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(40px, 6vw, 80px);
+  position: relative;
+  padding-top: clamp(40px, 6vw, 60px);
+}
+
+.section-header .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: clamp(10px, 1.5vw, 20px);
+}
+
+.section-header .label-line {
+  width: clamp(30px, 3vw, 40px);
+  height: 1px;
+  background: var(--accent-color);
+}
+
+.section-header .label-text {
+  font-size: clamp(10px, 0.8vw, 12px);
+  letter-spacing: clamp(2px, 0.2vw, 3px);
+  text-transform: uppercase;
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 900;
+  color: var(--text-light);
+  margin-bottom: clamp(15px, 2vw, 20px);
+  line-height: 1.1;
+}
+
+.section-header h2 .accent {
+  color: var(--accent-color);
+}
+
+.section-header .section-subtitle {
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.6);
+  max-width: min(600px, 90vw);
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px);
+}
+
+/* Glass Effect */
+.glass-effect {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+}
+
+/* Button Styles */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1vw, 15px);
+  padding: clamp(12px, 1.5vw, 18px) clamp(25px, 3vw, 40px);
+  background: var(--accent-color);
+  color: var(--text-dark);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  overflow: hidden;
+  transition: var(--transition-fast);
+  border: none;
+  cursor: pointer;
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  min-height: 50px;
+}
+
+.btn-primary .btn-hover-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--text-light);
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  transition: var(--transition-fast);
+  z-index: 1;
+}
+
+.btn-primary:hover .btn-hover-bg {
+  transform: translateX(0);
+}
+
+.btn-primary span {
+  position: relative;
+  z-index: 2;
+  transition: var(--transition-fast);
+}
+
+.btn-primary:hover span {
+  color: var(--text-dark);
+}
+
+.btn-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 0.8vw, 10px);
+  padding: clamp(12px, 1.5vw, 18px) clamp(20px, 2.5vw, 35px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  overflow: hidden;
+  transition: var(--transition-fast);
+  background: transparent;
+  cursor: pointer;
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  min-height: 50px;
+}
+
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--text-light);
+  top: 0;
+  left: -100%;
+  transition: var(--transition-fast);
+  z-index: 1;
+}
+
+.btn-outline:hover::before {
+  left: 0;
+}
+
+.btn-outline span {
+  position: relative;
+  z-index: 2;
+  transition: var(--transition-fast);
+}
+
+.btn-outline:hover span {
+  color: var(--text-dark);
+}
+
+/* Grid Layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(15px, 2vw, 30px);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(15px, 2vw, 30px);
+}
+
+/* Animation Delays */
+.stagger-child > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-child > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-child > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-child > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-child > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .section-wrapper:not(.projects-section) {
+    padding: clamp(60px, 8vw, 100px) 0;
+  }
+  
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .section-wrapper:not(.projects-section) {
+    padding: clamp(50px, 7vw, 80px) 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-shapes {
+    display: none;
+  }
+  
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+    gap: clamp(15px, 3vw, 30px);
+  }
+  
+  .section-wrapper:not(.projects-section) {
+    padding: clamp(40px, 6vw, 60px) 0;
+  }
+  
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+  
+  .hero-section {
+    min-height: 500px;
+    height: 85vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-header h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+  
+  .section-header .section-subtitle {
+    font-size: clamp(0.85rem, 4vw, 1rem);
+  }
+  
+  .section-wrapper:not(.projects-section) {
+    padding: clamp(30px, 5vw, 50px) 0;
+  }
+  
+  .container {
+    padding: 0 clamp(12px, 3vw, 20px);
+  }
+  
+  .hero-section {
+    min-height: 450px;
+    height: 80vh;
+  }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) and (pointer: coarse) {
+  .btn-primary:hover,
+  .btn-outline:hover {
+    transform: none;
+  }
+  
+  .section-wrapper {
+    transform: translateY(20px);
+  }
+}
+
+/* Loading States */
+.loading * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Print Styles */
+@media print {
+  .home-page {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .floating-shapes,
+  .background-gradients {
+    display: none !important;
+  }
+}
+/* ================================
+   NO GAP FIX FOR SECTIONS
+   Add this to Home.css
+================================ */
+
+/* Remove all gaps between sections */
+.section-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Specifically target the transition between RecentProjects and Services */
+.projects-section + .services-section {
+  margin-top: -40px !important;
+}
+
+/* Override any parent container spacing */
+.home-page > section {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure floating elements don't create visual gaps */
+.floating-shapes,
+.background-gradients {
+  z-index: -1; /* Keep behind content */
+}
+
+/* Debug: Remove after confirming gap is fixed */
+/*
+.recent-projects { outline: 2px solid red !important; }
+.services-section { outline: 2px solid blue !important; }
+*/
+/* Add to Home.css */
+.section-wrapper.services-section {
+  padding-bottom: 40px !important;
+}
+
+.section-wrapper.process-section {
+  padding-top: 20px !important; /* Small gap */
+}
+
+/* Or use a specific spacing class */
+.section-gap-sm {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
 }

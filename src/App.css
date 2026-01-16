@@ -1,5 +1,9 @@
-/* App.css - UPDATED */
-* {
+/* App.css - COMPLETE UPDATED VERSION */
+
+/* Reset & Base Styles */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,101 +11,96 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #fefefe;
-  color: #333;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: #000;
+  color: #fff;
   line-height: 1.6;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Font imports - Add these to your index.html head */
-/* 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-*/
+/* App Container */
+#root {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
 
 .App {
   position: relative;
-  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
 }
 
-/* Custom scrollbar */
+/* Remove all default gaps */
+main {
+  display: block;
+  width: 100%;
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4a6fa8;
-  border-radius: 5px;
+  background: #9cff00;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6b93d6;
+  background: rgba(156, 255, 0, 0.8);
 }
 
-/* Ensure content doesn't hide behind fixed navbar */
-main {
-  padding-top: 120px; /* Adjust based on your navbar height */
+/* Selection */
+::selection {
+  background: rgba(156, 255, 0, 0.3);
+  color: #fff;
 }
 
-/* Utility classes */
+/* Utility Classes */
 .container {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 40px;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 20px;
-  }
-}
-
-.section-title {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #111;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  color: #666;
-  max-width: 700px;
-  line-height: 1.6;
-  margin-bottom: 40px;
+  padding: 0 clamp(16px, 4vw, 40px);
 }
 
 .text-center {
   text-align: center;
 }
 
-.mt-100 {
-  margin-top: 100px;
+.mt-0 { margin-top: 0 !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.pt-0 { padding-top: 0 !important; }
+.pb-0 { padding-bottom: 0 !important; }
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
 }
 
-.mb-100 {
-  margin-bottom: 100px;
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
 }
 
-/* Animation classes */
-.fade-in {
-  animation: fadeIn 0.8s ease;
-}
-
-.slide-up {
-  animation: slideUp 0.8s ease;
-}
-
+/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -115,5 +114,20 @@ main {
   to { 
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.fade-in { animation: fadeIn 0.6s ease; }
+.slide-up { animation: slideUp 0.6s ease; }
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

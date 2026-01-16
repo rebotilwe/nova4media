@@ -1,0 +1,265 @@
+:root {
+  --accent-color: #4a6fa8;
+  --text-light: #ffffff;
+}
+
+/* SECTION */
+.contact-cta-section {
+  position: relative;
+  padding: 140px 0;
+  background: radial-gradient(circle at top, #111 0%, #000 60%);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s ease;
+}
+
+.contact-cta-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-cta-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+  pointer-events: none;
+}
+
+/* CONTENT */
+.cta-content {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 90px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.label-line {
+  width: 60px;
+  height: 2px;
+  background: var(--accent-color);
+  animation: pulseLine 2s infinite;
+}
+
+@keyframes pulseLine {
+  50% {
+    width: 90px;
+  }
+}
+
+.label-text {
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.cta-content h2 {
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 900;
+  color: var(--text-light);
+  line-height: 1.1;
+  margin-bottom: 30px;
+}
+
+.cta-content .accent {
+  color: var(--accent-color);
+}
+
+.cta-description {
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+  margin-bottom: 55px;
+}
+
+/* BUTTONS */
+.cta-buttons {
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--accent-color);
+  color: #000;
+  padding: 18px 48px;
+  border-radius: 50px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+}
+
+.btn-sparkle {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  background: #fff;
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: 0.3s ease;
+}
+
+.btn-primary:hover .btn-sparkle {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.btn-outline {
+  border: 2px solid rgba(255,255,255,0.4);
+  padding: 18px 44px;
+  border-radius: 50px;
+  color: #fff;
+  transition: 0.3s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-4px);
+}
+
+/* STATS */
+.cta-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  max-width: 900px;
+  margin: auto;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 70px;
+  position: relative;
+  z-index: 2;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: clamp(2.8rem, 4vw, 4rem);
+  font-weight: 900;
+  color: var(--accent-color);
+}
+
+.stat-number::after {
+  content: "+";
+  font-size: 1.8rem;
+  margin-left: 5px;
+}
+
+.stat-label {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+}
+
+/* FLOATING CIRCLES */
+.floating-elements {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.floating-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  animation: float 25s linear infinite;
+}
+
+.floating-circle:nth-child(1) {
+  width: 220px;
+  height: 220px;
+  top: 10%;
+  left: 10%;
+}
+
+.floating-circle:nth-child(2) {
+  width: 160px;
+  height: 160px;
+  bottom: 20%;
+  right: 15%;
+  animation-duration: 30s;
+}
+
+.floating-circle:nth-child(3) {
+  width: 110px;
+  height: 110px;
+  top: 50%;
+  left: 75%;
+  animation-duration: 35s;
+}
+
+@keyframes float {
+  50% {
+    transform: translate(80px, -80px);
+  }
+}
+
+/* PARTICLES */
+.particle-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  opacity: 0.25;
+  animation: particleMove 12s infinite linear;
+}
+
+@keyframes particleMove {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-120vh);
+    opacity: 0.6;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-stats {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .floating-circle {
+    display: none;
+  }
+}

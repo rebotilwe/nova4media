@@ -1,39 +1,112 @@
-// RecentProjects.js
-import React from 'react';
-import './RecentProjects.css';
+// components/RecentProjects/RecentProjects.jsx
+import React, { useState } from "react";
+import "./RecentProjects.css";
 
 const projects = [
-  { image: "https://images.unsplash.com/photo-1508923567004-3a6b8004f3d6?w=600&fit=crop&q=80", title: "Wedding Bliss", category: "Wedding Photography" },
-  { image: "https://images.unsplash.com/photo-1502764613149-7f1d229e2302?w=600&fit=crop&q=80", title: "Urban Life", category: "Street Photography" },
-  { image: "https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=600&fit=crop&q=80", title: "Portrait Glow", category: "Portrait Photography" },
-  { image: "https://images.unsplash.com/photo-1514516876040-55b3d882b580?w=600&fit=crop&q=80", title: "Nature Wonders", category: "Landscape Photography" },
-  { image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&fit=crop&q=80", title: "Corporate Moments", category: "Corporate Photography" },
-  { image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&fit=crop&q=80", title: "Lifestyle Magic", category: "Lifestyle Photography" },
+  {
+    id: 1,
+    title: "Luxury Wedding Photography",
+    category: "Events",
+    year: "2024",
+    image:
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 2,
+    title: "Fashion Editorial Shoot",
+    category: "Fashion",
+    year: "2025",
+    image:
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 3,
+    title: "Commercial Brand Campaign",
+    category: "Commercial",
+    year: "2025",
+    image:
+      "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 4,
+    title: "Creative Portrait Session",
+    category: "Portrait",
+    year: "2024",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1200&auto=format&fit=crop",
+  },
 ];
 
-const RecentProjects = () => {
+const categories = ["All", "Events", "Fashion", "Commercial", "Portrait"];
+
+function RecentProjects() {
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filtered =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((p) => p.category === activeCategory);
+
   return (
-    <section id="recent-projects" className="recent-projects-section">
+    <section className="recent-projects">
       <div className="container">
+        {/* Header */}
         <div className="section-header">
-          <span className="section-label">Recent Projects</span>
-          <h2 className="section-title">Showcasing Our Latest Works</h2>
+          <span className="section-tag">FEATURED WORK</span>
+          <h2>
+            Recent <span>Projects</span>
+          </h2>
+          <p>
+            A curated selection of our latest photography and visual storytelling
+            projects crafted with passion and precision.
+          </p>
         </div>
 
+        {/* Filters */}
+        <div className="filter-row">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`filter-btn ${
+                activeCategory === cat ? "active" : ""
+              }`}
+              onClick={() => setActiveCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Grid */}
         <div className="projects-grid">
-          {projects.map((project, index) => (
-            <div key={index} className="project-card">
-              <img src={project.image} alt={project.title} />
+          {filtered.map((project) => (
+            <div key={project.id} className="project-card">
+              <div className="image-wrapper">
+                <img src={project.image} alt={project.title} />
+              </div>
+
               <div className="project-overlay">
-                <h4>{project.title}</h4>
-                <span>{project.category}</span>
+                <span className="category">{project.category}</span>
+                <h3>{project.title}</h3>
+                <span className="year">{project.year}</span>
+
+                <button className="view-btn">
+                  View Project →
+                </button>
               </div>
             </div>
           ))}
         </div>
+
+        {/* CTA */}
+        <div className="projects-cta">
+          <a href="/portfolio" className="primary-btn">
+            View Full Portfolio →
+          </a>
+        </div>
       </div>
     </section>
   );
-};
+}
 
 export default RecentProjects;

@@ -1,100 +1,112 @@
-// components/Testimonials/Testimonials.js
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import React, { useState, useEffect, useRef } from 'react';
 import './Testimonials.css';
 
-function Testimonials() {
-  const testimonials = [
-    {
-      id: 1,
-      name: 'Charli Hapan',
-      role: 'Marketing Director',
-      text: 'When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-      avatarColor: '#4a6fa8'
-    },
-    {
-      id: 2,
-      name: 'Julie Gillespie',
-      role: 'Creative Lead',
-      text: 'When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-      avatarColor: '#6b93d6'
-    },
-    {
-      id: 3,
-      name: 'Melanie Krueger',
-      role: 'Product Manager',
-      text: 'When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-      avatarColor: '#5a7fb0'
-    },
-    {
-      id: 4,
-      name: 'Sydney Gregory',
-      role: 'CEO, TechCorp',
-      text: 'When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-      avatarColor: '#4a6fa8'
-    },
-    {
-      id: 5,
-      name: 'Dahlia Chang',
-      role: 'Founder, DesignCo',
-      text: 'When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.',
-      avatarColor: '#6b93d6'
-    }
-  ];
+const testimonials = [
+  {
+    id: 1,
+    name: "Sarah Johnson",
+    role: "Marketing Director, TechCorp",
+    content: "Working with NOVA4MEDIA transformed our brand presence. Their creative vision and attention to detail are unmatched.",
+    rating: 5,
+    project: "Corporate Brand Campaign",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&auto=format&fit=crop"
+  },
+  {
+    id: 2,
+    name: "David Lee",
+    role: "CEO, StartupHub",
+    content: "The team brought our ideas to life with professionalism and creativity. Highly recommended!",
+    rating: 5,
+    project: "Product Launch Campaign",
+    avatar: "https://images.unsplash.com/photo-1502767089025-6572583495f1?w=400&auto=format&fit=crop"
+  },
+  {
+    id: 3,
+    name: "Emily Carter",
+    role: "Creative Lead, BrandWorks",
+    content: "Their attention to detail and aesthetic sense made all the difference in our project.",
+    rating: 5,
+    project: "Rebranding Project",
+    avatar: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=400&auto=format&fit=crop"
+  }
+];
+
+const TestimonialsSection = React.forwardRef((props, ref) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    cardRefs.current.forEach(card => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="testimonials" className="testimonials-section">
+    <section className="testimonials-section" ref={ref}>
+      {/* Parallax Background */}
+      <div className="testimonials-bg">
+        <div className="bg-layer layer-1"></div>
+        <div className="bg-layer layer-2"></div>
+      </div>
+
+      {/* Floating Quotes */}
+      <div className="floating-quotes">
+        <div className="quote">"</div>
+        <div className="quote">"</div>
+        <div className="quote">"</div>
+      </div>
+
       <div className="container">
-        <div className="section-header">
-          <span className="section-label">WHAT PEOPLE SAY</span>
-          <h2 className="section-title">Trusted by Clients Worldwide</h2>
+        <div className="testimonials-header">
+          <h2>What Our <span className="accent">Clients Say</span></h2>
+          <p>Trusted by brands and individuals worldwide</p>
         </div>
 
-        <div className="testimonials-slider">
-          <Swiper
-            modules={[Pagination, Autoplay]}
-            spaceBetween={30}
-            slidesPerView={1}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
-            breakpoints={{
-              768: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              }
-            }}
-            className="testimonials-swiper"
-          >
-            {testimonials.map((testimonial) => (
-              <SwiperSlide key={testimonial.id}>
-                <div className="testimonial-card">
-                  <div className="quote-icon">"</div>
-                  <p className="testimonial-text">{testimonial.text}</p>
-                  <div className="testimonial-author">
-                    <div 
-                      className="author-avatar"
-                      style={{ backgroundColor: testimonial.avatarColor }}
-                    >
-                      {testimonial.name.charAt(0)}
-                    </div>
-                    <div className="author-info">
-                      <h4 className="author-name">{testimonial.name}</h4>
-                      <p className="author-role">{testimonial.role}</p>
-                    </div>
-                  </div>
+        <div className="testimonials-carousel">
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={testimonial.id}
+              ref={el => (cardRefs.current[index] = el)}
+              className={`testimonial-card ${index === activeIndex ? 'active' : ''}`}
+              onClick={() => setActiveIndex(index)}
+            >
+              <div className="quote-icon">“</div>
+              <p className="testimonial-text">{testimonial.content}</p>
+              <div className="testimonial-author">
+                <img className="author-avatar" src={testimonial.avatar} alt={testimonial.name} />
+                <div className="author-info">
+                  <div className="author-name">{testimonial.name}</div>
+                  <div className="author-role">{testimonial.role}</div>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Pagination */}
+        <div className="testimonials-pagination">
+          {testimonials.map((_, idx) => (
+            <span
+              key={idx}
+              className={`pagination-bullet ${idx === activeIndex ? 'active' : ''}`}
+              onClick={() => setActiveIndex(idx)}
+            ></span>
+          ))}
         </div>
       </div>
     </section>
   );
-}
+});
 
-export default Testimonials;
+export default TestimonialsSection;

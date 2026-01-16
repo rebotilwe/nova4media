@@ -1,4 +1,3 @@
-// components/Services/Services.js - UPDATED
 import React from 'react';
 import './Services.css';
 
@@ -10,26 +9,38 @@ const services = [
 ];
 
 function Services() {
-return (
-    <section id="services" className="services-section">
-      <div className="container">
-        <div className="section-header">
-          <span className="section-label">Our Best Services</span>
-          <h2 className="section-title">What We Offer</h2>
-        </div>
+  return (
+ <section id="services" className="services-section">
+  <div className="animated-gradient-bg"></div>  {/* NEW */}
+  <div className="floating-elements-services">
+    <span className="float-circle circle-1"></span>
+    <span className="float-circle circle-2"></span>
+    <span className="float-circle circle-3"></span>
+  </div>
 
-        <div className="services-grid">
-          {services.map((service, index) => (
-            <div key={index} className="service-card">
-              <div className="service-number">{service.number}</div>
-              <div className="service-icon">{service.icon}</div>
-              <h4>{service.title}</h4>
-              <p>{service.desc}</p>
-            </div>
-          ))}
+  <div className="container">
+    <div className="section-header">
+      <span className="section-label">Our Best Services</span>
+      <h2 className="section-title">What We Offer</h2>
+    </div>
+
+    <div className="services-grid">
+      {services.map((service, index) => (
+        <div key={index} className="service-card">
+          <div className="service-number-circle">
+            <span className="service-number">{service.number}</span>
+          </div>
+          <div className="service-icon">{service.icon}</div>
+          <h4 className="service-title">{service.title}</h4>
+          <p className="service-desc">{service.desc}</p>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+
   );
-};
+}
+
 export default Services;
