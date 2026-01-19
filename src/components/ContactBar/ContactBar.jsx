@@ -15,12 +15,12 @@ function ContactBar() {
 
         <span className="contact-item">
           <FiPhone />
-          +123 456 7890
+         +27 78 152 6754
         </span>
 
         <span className="contact-item">
           <FiMail />
-          needhelp@company.com
+         info@nova4media.co.za
         </span>
       </div>
     </div>

@@ -49,9 +49,9 @@ function Footer() {
         <div className="footer-column">
           <h4>Contact</h4>
           <ul>
-            <li>📍 Pretoria, South Africa</li>
-            <li>📞 +27 12 345 6789</li>
-            <li>✉️ hello@photia.co.za</li>
+            <li>📍 123 Nova Street, Northcliff, Johannesburg, South Africa</li>
+            <li>📞+27 78 152 6754</li>
+            <li>✉️ info@nova4media.co.za</li>
           </ul>
         </div>
 

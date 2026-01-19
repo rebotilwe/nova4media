@@ -100,7 +100,7 @@ function RecentProjects() {
 
         {/* CTA */}
         <div className="projects-cta">
-          <a href="/portfolio" className="primary-btn">
+          <a href="/projects" className="primary-btn">
             View Full Portfolio →
           </a>
         </div>

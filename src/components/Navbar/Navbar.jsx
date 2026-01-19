@@ -82,35 +82,26 @@ function Navbar() {
                 <Link to="/services" className="dropdown-item" onClick={closeMobile}>
                   Service
                 </Link>
-                <Link to="/service-details" className="dropdown-item" onClick={closeMobile}>
-                  Service Details
-                </Link>
+        
                 <Link to="/team" className="dropdown-item" onClick={closeMobile}>
-                  Team
+                  Blog
                 </Link>
-                <Link to="/team-details" className="dropdown-item" onClick={closeMobile}>
-                  Team Details
-                </Link>
-                <Link to="/pricing" className="dropdown-item" onClick={closeMobile}>
-                  Pricing Table
-                </Link>
-                <Link to="/testimonials" className="dropdown-item" onClick={closeMobile}>
-                  Testimonial
-                </Link>
+            
+           
               </div>
             )}
           </div>
 
           <Link
-            to="/blog"
-            className={location.pathname === "/blog" ? "active" : ""}
+            to="/pricing"
+            className={location.pathname === "/pricing" ? "active" : ""}
             onClick={closeMobile}
           >
-            Blog
+            Pricing
           </Link>
 
           <Link
-            to="/contact"
+            to="/contactPage"
             className={location.pathname === "/contact" ? "active" : ""}
             onClick={closeMobile}
           >

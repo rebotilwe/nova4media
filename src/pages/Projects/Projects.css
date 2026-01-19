@@ -1,0 +1,108 @@
+/* ===========================
+   PROJECTS PAGE STYLES
+=========================== */
+
+.projects-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 420px;
+  background: url("https://picsum.photos/id/1018/1920/1080") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.4)
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--accent-color, #9cff00);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.hero-content p {
+  max-width: 600px;
+  margin: 0 auto 24px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.breadcrumbs a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+/* Intro Section */
+.projects-intro {
+  background: #050505;
+  color: #fff;
+  padding: 80px 20px 40px;
+  text-align: center;
+}
+
+.projects-intro h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.projects-intro p {
+  max-width: 720px;
+  margin: auto;
+  font-size: 1rem;
+  color: #bbb;
+  line-height: 1.7;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .projects-hero {
+    height: 60vh;
+  }
+
+  .projects-intro {
+    padding: 60px 16px 30px;
+  }
+}
