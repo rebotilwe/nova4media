@@ -3,14 +3,32 @@ import './Team.css';
 import { FaInstagram, FaLinkedin, FaTwitter, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 function Team() {
-  const teamMembers = [
-    { id: 1, name: 'John Anderson', role: 'Lead Photographer', photo: 'https://randomuser.me/api/portraits/men/32.jpg' },
-    { id: 2, name: 'Sarah Miller', role: 'Creative Director', photo: 'https://randomuser.me/api/portraits/women/44.jpg' },
-    { id: 3, name: 'David Chen', role: 'Event Specialist', photo: 'https://randomuser.me/api/portraits/men/56.jpg' },
-    { id: 4, name: 'Emma Wilson', role: 'Portrait Artist', photo: 'https://randomuser.me/api/portraits/women/68.jpg' },
-    { id: 5, name: 'Alex Brown', role: 'Videographer', photo: 'https://randomuser.me/api/portraits/men/72.jpg' },
-    { id: 6, name: 'Olivia Green', role: 'Photo Editor', photo: 'https://randomuser.me/api/portraits/women/77.jpg' },
-  ];
+const teamMembers = [
+  {
+    id: 1,
+    name: 'Matt Kabus',
+    role: 'CEO & Founder',
+    photo: 'https://randomuser.me/api/portraits/men/32.jpg'
+  },
+  {
+    id: 2,
+    name: 'Ishraq Khan',
+    role: 'Business Development',
+    photo: 'https://randomuser.me/api/portraits/men/45.jpg'
+  },
+  {
+    id: 3,
+    name: 'John Dosh',
+    role: 'Strategy Consultant',
+    photo: 'https://randomuser.me/api/portraits/men/56.jpg'
+  },
+  {
+    id: 4,
+    name: 'Daniyal Micle',
+    role: 'Business Development',
+    photo: 'https://randomuser.me/api/portraits/men/67.jpg'
+  }
+];
 
   const carouselRef = useRef(null);
   const [hoveredMember, setHoveredMember] = useState(null);
