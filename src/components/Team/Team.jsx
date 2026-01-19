@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './Team.css';
 import { FaInstagram, FaLinkedin, FaTwitter, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
@@ -13,10 +13,12 @@ function Team() {
   ];
 
   const carouselRef = useRef(null);
+  const [hoveredMember, setHoveredMember] = useState(null);
 
   const scroll = (direction) => {
     if (carouselRef.current) {
-      const scrollAmount = direction === 'left' ? -250 : 250;
+      const cardWidth = 240; // Approximate card width on mobile
+      const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
       carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
@@ -30,23 +32,54 @@ function Team() {
             Meet the <span className="accent">Creative Minds</span> Behind Our Magic
           </h2>
           <p className="section-description">
-            Explore traffic sources, page behavior, conversions, and more to gain deep insight into your audience. With us, your business doesn’t just adapt—it evolves.
+            Our talented team combines technical expertise with artistic vision to deliver stunning visual stories that captivate and inspire.
           </p>
         </div>
 
+        <div className="team-grid-desktop">
+          {teamMembers.map(member => (
+            <div 
+              key={member.id} 
+              className="member-card-desktop"
+              onMouseEnter={() => setHoveredMember(member.id)}
+              onMouseLeave={() => setHoveredMember(null)}
+            >
+              <div className="member-avatar-desktop">
+                <img src={member.photo} alt={member.name} />
+                <div className="avatar-overlay">
+                  <div className="social-links">
+                    <a href="#" aria-label="Instagram"><FaInstagram /></a>
+                    <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
+                    <a href="#" aria-label="Twitter"><FaTwitter /></a>
+                  </div>
+                </div>
+              </div>
+              <div className="member-info-desktop">
+                <h4>{member.name}</h4>
+                <p>{member.role}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
         <div className="carousel-wrapper">
-          <button className="carousel-arrow left" onClick={() => scroll('left')}>
+          <button className="carousel-arrow left" onClick={() => scroll('left')} aria-label="Previous">
             <FaChevronLeft />
           </button>
           <div className="team-carousel" ref={carouselRef}>
             {teamMembers.map(member => (
-              <div key={member.id} className="member-card">
+              <div 
+                key={member.id} 
+                className={`member-card ${hoveredMember === member.id ? 'hovered' : ''}`}
+                onMouseEnter={() => setHoveredMember(member.id)}
+                onMouseLeave={() => setHoveredMember(null)}
+              >
                 <div className="member-avatar">
                   <img src={member.photo} alt={member.name} />
                   <div className="overlay">
-                    <a href="#"><FaInstagram /></a>
-                    <a href="#"><FaLinkedin /></a>
-                    <a href="#"><FaTwitter /></a>
+                    <a href="#" aria-label="Instagram"><FaInstagram /></a>
+                    <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
+                    <a href="#" aria-label="Twitter"><FaTwitter /></a>
                   </div>
                 </div>
                 <div className="member-info">
@@ -56,21 +89,10 @@ function Team() {
               </div>
             ))}
           </div>
-          <button className="carousel-arrow right" onClick={() => scroll('right')}>
+          <button className="carousel-arrow right" onClick={() => scroll('right')} aria-label="Next">
             <FaChevronRight />
           </button>
         </div>
-
-        {/* <div className="clients-section">
-          <h3 className="clients-title">WE WORKED WITH THE WORLD'S BEST COMPANIES</h3>
-          <div className="clients-logos">
-            {['Company A', 'Company B', 'Company C', 'Company D', 'Company E', 'Company F'].map((company, index) => (
-              <div key={index} className="client-logo">
-                <div className="logo-placeholder">{company}</div>
-              </div>
-            ))}
-          </div>
-        </div> */}
       </div>
     </section>
   );

@@ -1,12 +1,9 @@
-:root {
-  --accent-color: #4a6fa8;
-  --text-light: #ffffff;
-}
-
-/* SECTION */
+/* ------------------------------
+  Contact Section - Snug to Footer
+-------------------------------- */
 .contact-cta-section {
   position: relative;
-  padding: 140px 0;
+  padding: 100px 0 40px; /* less bottom padding for snug fit */
   background: radial-gradient(circle at top, #111 0%, #000 60%);
   overflow: hidden;
   opacity: 0;
@@ -27,15 +24,16 @@
   pointer-events: none;
 }
 
-/* CONTENT */
+/* Content */
 .cta-content {
   text-align: center;
   max-width: 780px;
-  margin: 0 auto 90px;
+  margin: 0 auto; /* removed bottom margin */
   position: relative;
   z-index: 2;
 }
 
+/* Label */
 .section-label {
   display: inline-flex;
   align-items: center;
@@ -50,12 +48,6 @@
   animation: pulseLine 2s infinite;
 }
 
-@keyframes pulseLine {
-  50% {
-    width: 90px;
-  }
-}
-
 .label-text {
   font-size: 13px;
   letter-spacing: 4px;
@@ -64,6 +56,7 @@
   font-weight: 700;
 }
 
+/* Heading & Description */
 .cta-content h2 {
   font-size: clamp(2.5rem, 5vw, 4.2rem);
   font-weight: 900;
@@ -80,10 +73,10 @@
   font-size: 1.2rem;
   color: rgba(255,255,255,0.7);
   line-height: 1.6;
-  margin-bottom: 55px;
+  margin-bottom: 40px; /* reduced from 55px */
 }
 
-/* BUTTONS */
+/* Buttons */
 .cta-buttons {
   display: flex;
   gap: 22px;
@@ -140,7 +133,7 @@
   transform: translateY(-4px);
 }
 
-/* STATS */
+/* Stats (if used) */
 .cta-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -148,36 +141,13 @@
   max-width: 900px;
   margin: auto;
   border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 70px;
+  padding-top: 50px; /* reduced from 70px */
+  padding-bottom: 0; /* remove extra bottom space */
   position: relative;
   z-index: 2;
 }
 
-.stat-item {
-  text-align: center;
-}
-
-.stat-number {
-  font-size: clamp(2.8rem, 4vw, 4rem);
-  font-weight: 900;
-  color: var(--accent-color);
-}
-
-.stat-number::after {
-  content: "+";
-  font-size: 1.8rem;
-  margin-left: 5px;
-}
-
-.stat-label {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  letter-spacing: 1px;
-  color: rgba(255,255,255,0.6);
-  text-transform: uppercase;
-}
-
-/* FLOATING CIRCLES */
+/* Floating Circles & Particles */
 .floating-elements {
   position: absolute;
   inset: 0;
@@ -220,7 +190,6 @@
   }
 }
 
-/* PARTICLES */
 .particle-bg {
   position: absolute;
   inset: 0;
@@ -250,13 +219,18 @@
 
 /* MOBILE */
 @media (max-width: 768px) {
+  .contact-cta-section {
+    padding: 80px 0 30px; /* snug bottom for mobile */
+  }
+
   .cta-buttons {
     flex-direction: column;
   }
 
   .cta-stats {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 30px;
+    padding-top: 40px;
   }
 
   .floating-circle {

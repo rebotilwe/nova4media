@@ -1,33 +1,71 @@
-// components/BlogPreview/BlogPreview.jsx
 import React from 'react';
 import './BlogPreview.css';
+import { FaCalendar, FaClock, FaUser, FaArrowRight } from 'react-icons/fa';
 
 const blogPosts = [
   {
     id: 1,
     title: 'The Art of Visual Storytelling in Photography',
-    excerpt: 'Learn how to create compelling narratives through your lens and connect with your audience emotionally.',
+    excerpt: 'Learn how to create compelling narratives through your lens and connect with your audience emotionally through carefully crafted imagery.',
     category: 'Photography Tips',
     date: 'Dec 15, 2024',
     readTime: '5 min read',
     image: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&auto=format&fit=crop',
-    author: 'Jane Doe'
+    author: 'Jane Doe',
+    authorRole: 'Lead Photographer',
+    authorImage: 'https://images.unsplash.com/photo-1494790108755-2616b786d4d7?w=150&auto=format&fit=crop'
   },
-  // Add more posts...
+  {
+    id: 2,
+    title: 'Mastering Light in Portrait Photography',
+    excerpt: 'Discover advanced lighting techniques that can transform your portrait photography and create stunning, professional results.',
+    category: 'Tutorial',
+    date: 'Dec 10, 2024',
+    readTime: '8 min read',
+    image: 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&auto=format&fit=crop',
+    author: 'John Smith',
+    authorRole: 'Lighting Expert',
+    authorImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop'
+  },
+  {
+    id: 3,
+    title: 'The Future of AI in Photo Editing',
+    excerpt: 'Exploring how artificial intelligence is revolutionizing the photo editing workflow and what it means for photographers.',
+    category: 'Technology',
+    date: 'Dec 5, 2024',
+    readTime: '6 min read',
+    image: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&auto=format&fit=crop',
+    author: 'Alex Chen',
+    authorRole: 'Tech Editor',
+    authorImage: 'https://images.unsplash.com/photo-1507591064344-4c6ce005-128?w=150&auto=format&fit=crop'
+  },
+  {
+    id: 4,
+    title: 'Building Your Photography Brand',
+    excerpt: 'Essential strategies for establishing and growing your personal brand as a photographer in the digital age.',
+    category: 'Business',
+    date: 'Nov 28, 2024',
+    readTime: '10 min read',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop',
+    author: 'Sarah Johnson',
+    authorRole: 'Brand Strategist',
+    authorImage: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&auto=format&fit=crop'
+  }
 ];
 
 function BlogPreview() {
   return (
-    <div className="blog-preview">
+    <section className="blog-preview">
       <div className="container">
         <div className="section-header">
           <div className="section-label">
-            <span className="label-line"></span>
             <span className="label-text">INSIGHTS & UPDATES</span>
           </div>
-          <h2>Latest <span className="accent">Blog Posts</span></h2>
+          <h2 className="section-title">
+            Latest <span className="accent">Blog Posts</span>
+          </h2>
           <p className="section-subtitle">
-            Stay updated with industry trends, tips, and creative insights
+            Stay updated with industry trends, expert tips, and creative insights from our team of professionals.
           </p>
         </div>
 
@@ -49,37 +87,45 @@ function BlogPreview() {
               
               <div className="card-content">
                 <div className="card-meta">
-                  <span className="date">{post.date}</span>
-                  <span className="dot">•</span>
-                  <span className="read-time">{post.readTime}</span>
+                  <div className="meta-item">
+                    <FaCalendar />
+                    <span>{post.date}</span>
+                  </div>
+                  <div className="meta-dot"></div>
+                  <div className="meta-item">
+                    <FaClock />
+                    <span>{post.readTime}</span>
+                  </div>
                 </div>
                 
                 <h3 className="card-title">{post.title}</h3>
                 
                 <p className="card-excerpt">{post.excerpt}</p>
                 
-                <div className="card-footer">
-                  <span className="author">By {post.author}</span>
-                  <div className="arrow-icon">→</div>
+                <div className="author-section">
+                  <div className="author-avatar">
+                    <img src={post.authorImage} alt={post.author} />
+                  </div>
+                  <div className="author-info">
+                    <h4>{post.author}</h4>
+                    <p>{post.authorRole}</p>
+                  </div>
                 </div>
               </div>
-              
-              <div className="card-border"></div>
             </article>
           ))}
         </div>
         
         <div className="view-all-blog">
-          <a href="/blog" className="btn-outline">
-            <span>View All Articles</span>
+          <a href="/blog" className="btn-modern">
+            <span>Explore All Articles</span>
             <div className="arrow-group">
-              <span>→</span>
-              <span>→</span>
+              <FaArrowRight />
             </div>
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
