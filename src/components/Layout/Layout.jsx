@@ -7,6 +7,7 @@ import Footer from "../Footer/Footer";
 import useScrollReveal from "../../hooks/useScrollReveal"
 import "../../styles/scroll-animations.css"
 import "./Layout.css";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop"
 
 function Layout() {
   const [isLoading, setIsLoading] = useState(true);
@@ -51,6 +52,9 @@ function Layout() {
         </main>
 
         <Footer />
+        
+  {/* ✅ Floating Scroll Button */}
+  <ScrollToTop />
       </div>
     </div>
   );

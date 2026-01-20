@@ -11,7 +11,7 @@ import PortfolioSection from "./components/PortfolioSection/PortfolioSection";
 import Projects from "./pages/Projects/Projects";
 import Pricing from "./pages/Pricing/Pricing";
 import ContactPage from "./components/ContactPage/ContactPage";
-
+import BlogPreview from "./components/BlogPreview/BlogPreview";
 
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/contactPage" element={<ContactPage />} />
+          <Route path="/blog-preview" element={<BlogPreview />} />
         </Route>
       </Routes>
     </BrowserRouter>

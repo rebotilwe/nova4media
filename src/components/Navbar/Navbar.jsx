@@ -28,8 +28,13 @@ function Navbar() {
     setActiveDropdown(null);
   };
 
-  const toggleDropdown = (menu) => {
-    setActiveDropdown(activeDropdown === menu ? null : menu);
+  // Dropdown handlers with delay tolerance
+  const openDropdown = () => {
+    setActiveDropdown("pages");
+  };
+
+  const closeDropdown = () => {
+    setTimeout(() => setActiveDropdown(null), 150); // 150ms delay forgives quick mouse moves
   };
 
   return (
@@ -38,7 +43,7 @@ function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="logo">
-          NOVA<span>.</span>
+          NOVA 4<span>.</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -67,27 +72,40 @@ function Navbar() {
             Project
           </Link>
 
-          {/* Dropdown */}
-          <div
-            className="dropdown"
-            onMouseEnter={() => toggleDropdown("pages")}
-            onMouseLeave={() => toggleDropdown(null)}
-          >
-            <button className="dropdown-toggle">
+          {/* Fixed Dropdown */}
+          <div className="dropdown">
+            <button
+              className="dropdown-toggle"
+              onClick={() =>
+                activeDropdown === "pages"
+                  ? setActiveDropdown(null)
+                  : setActiveDropdown("pages")
+              }
+            >
               Pages ▾
             </button>
 
             {activeDropdown === "pages" && (
-              <div className="dropdown-menu">
-                <Link to="/services" className="dropdown-item" onClick={closeMobile}>
-                  Service
+              <div 
+                className="dropdown-menu"
+                onMouseEnter={openDropdown}  // ✅ Keeps open on menu hover
+                onMouseLeave={closeDropdown} // ✅ Closes only after leaving entire menu
+              >
+                <Link
+                  to="/services"
+                  className="dropdown-item"
+                  onClick={closeMobile}
+                >
+                  Services
                 </Link>
-        
-                <Link to="/team" className="dropdown-item" onClick={closeMobile}>
+
+                <Link
+                  to="/blog-preview"
+                  className="dropdown-item"
+                  onClick={closeMobile}
+                >
                   Blog
                 </Link>
-            
-           
               </div>
             )}
           </div>
@@ -102,7 +120,7 @@ function Navbar() {
 
           <Link
             to="/contactPage"
-            className={location.pathname === "/contact" ? "active" : ""}
+            className={location.pathname === "/contactPage" ? "active" : ""}
             onClick={closeMobile}
           >
             Contact Us
@@ -112,7 +130,7 @@ function Navbar() {
         {/* CTA */}
         <div className="cta-group">
           <Link to="/contact" className="lets-talk-btn">
-            LET’S TALK
+            LET'S TALK
           </Link>
 
           <button className="arrow-btn" aria-label="Open">

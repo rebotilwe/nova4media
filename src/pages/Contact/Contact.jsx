@@ -79,12 +79,12 @@ function ContactSection() {
           </p>
 
           <div className="cta-buttons">
-            <a href="/contact" className="btn-primary">
+            <a href="/contactPage" className="btn-primary">
               Start a Project
               <span className="btn-sparkle">✨</span>
             </a>
 
-            <a href="tel:+1234567890" className="btn-outline">
+            <a href="tel:+27 78 152 6754" className="btn-outline">
               Call Us Now
             </a>
           </div>

@@ -1,11 +1,15 @@
-import React, { useRef, useEffect } from 'react';
-import { Play, Award, Users, Camera, Video, Globe } from 'lucide-react';
-import './About.css'; // Use the updated CSS file I provided earlier
+import React, { useRef, useEffect, useState } from 'react';
+import { Play, Award, Users, Camera, Video, Globe, X } from 'lucide-react';
+import './About.css';
 
 const About = () => {
   const sectionRefs = useRef([]);
+  const [showVideo, setShowVideo] = useState(false);
 
-  // Intersection Observer for scroll reveal
+  // ✅ Nova4Media YouTube Video
+  const VIDEO_ID = "tQDCKRifSNA";
+
+  // ================= Scroll Reveal =================
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => {
@@ -23,7 +27,12 @@ const About = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Stats
+  // ================= Lock Scroll when Modal Open =================
+  useEffect(() => {
+    document.body.style.overflow = showVideo ? "hidden" : "auto";
+  }, [showVideo]);
+
+  // ================= Data =================
   const stats = [
     { number: '10+', label: 'Years Experience', icon: <Award /> },
     { number: '500+', label: 'Projects Completed', icon: <Camera /> },
@@ -31,7 +40,6 @@ const About = () => {
     { number: '50+', label: 'Awards Won', icon: <Award /> },
   ];
 
-  // Services
   const services = [
     { icon: <Camera />, title: 'Professional Photography', desc: 'High-quality commercial, product, and event photography.' },
     { icon: <Video />, title: 'Video Production', desc: 'Corporate videos, commercials, and promotional content.' },
@@ -39,7 +47,6 @@ const About = () => {
     { icon: <Play />, title: 'Live Streaming', desc: 'Professional live streaming for events and conferences.' },
   ];
 
-  // Team Members
   const teamMembers = [
     { name: 'John Smith', role: 'Creative Director', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop', bio: '10+ years in visual storytelling and brand development.' },
     { name: 'Sarah Johnson', role: 'Lead Photographer', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=500&fit=crop', bio: 'Specializes in commercial and product photography.' },
@@ -47,7 +54,6 @@ const About = () => {
     { name: 'Emma Davis', role: 'Digital Strategist', image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=500&fit=crop', bio: 'Social media and digital marketing specialist.' },
   ];
 
-  // Values
   const values = [
     { title: 'Creativity', desc: 'Pushing boundaries with innovative visual solutions.' },
     { title: 'Quality', desc: 'Delivering exceptional work that exceeds expectations.' },
@@ -58,11 +64,35 @@ const About = () => {
   return (
     <div className="about-us-page">
 
-      {/* Hero Section */}
+      {/* ================= VIDEO MODAL ================= */}
+      {showVideo && (
+        <div className="video-modal" onClick={() => setShowVideo(false)}>
+          <div className="video-modal-content" onClick={e => e.stopPropagation()}>
+            <button className="video-close-btn" onClick={() => setShowVideo(false)}>
+              <X size={26} />
+            </button>
+
+            <div className="video-wrapper">
+              <iframe
+                src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1`}
+                title="Nova4Media Story"
+                frameBorder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= HERO SECTION ================= */}
       <section className="about-hero">
         <div className="hero-video-bg">
           <video autoPlay muted loop playsInline>
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-shot-of-a-forest-1197-large.mp4" type="video/mp4" />
+            <source
+              src="https://assets.mixkit.co/videos/preview/mixkit-close-up-shot-of-a-forest-1197-large.mp4"
+              type="video/mp4"
+            />
           </video>
           <div className="video-overlay"></div>
         </div>
@@ -78,18 +108,24 @@ const About = () => {
             <h1 className="reveal" ref={el => sectionRefs.current[0] = el}>
               We Are <span className="brand-accent">NOVA4MEDIA</span>
             </h1>
+
             <p className="reveal" ref={el => sectionRefs.current[1] = el}>
               South Africa's premier photography, videography, and digital media agency.
               We transform ideas into compelling visual stories that connect with audiences.
             </p>
-            <button className="cta-button reveal" ref={el => sectionRefs.current[2] = el}>
+
+            <button
+              className="cta-button reveal"
+              ref={el => sectionRefs.current[2] = el}
+              onClick={() => setShowVideo(true)}
+            >
               Watch Our Story <Play size={20} />
             </button>
           </div>
         </div>
       </section>
 
-      {/* Our Story */}
+      {/* ================= OUR STORY ================= */}
       <section className="our-story">
         <div className="container">
           <div className="story-grid">
@@ -108,18 +144,26 @@ const About = () => {
                 professionals who value quality, innovation, and results-driven media solutions.
               </p>
             </div>
+
             <div className="story-image reveal" ref={el => sectionRefs.current[4] = el}>
-              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop" alt="Nova4Media Team" />
+              <img
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop"
+                alt="Nova4Media Team"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats */}
+      {/* ================= STATS ================= */}
       <section className="stats-section">
         <div className="container stats-grid">
           {stats.map((stat, idx) => (
-            <div key={idx} className="stat-card reveal" ref={el => sectionRefs.current[5 + idx] = el}>
+            <div
+              key={idx}
+              className="stat-card reveal"
+              ref={el => sectionRefs.current[5 + idx] = el}
+            >
               <div className="stat-icon">{stat.icon}</div>
               <div className="stat-number">{stat.number}</div>
               <div className="stat-label">{stat.label}</div>
@@ -128,7 +172,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Services */}
+      {/* ================= SERVICES ================= */}
       <section className="services-section">
         <div className="container">
           <div className="section-header reveal" ref={el => sectionRefs.current[9] = el}>
@@ -138,7 +182,11 @@ const About = () => {
 
           <div className="services-grid">
             {services.map((service, idx) => (
-              <div key={idx} className="service-card reveal" ref={el => sectionRefs.current[10 + idx] = el}>
+              <div
+                key={idx}
+                className="service-card reveal"
+                ref={el => sectionRefs.current[10 + idx] = el}
+              >
                 <div className="service-icon">{service.icon}</div>
                 <h3>{service.title}</h3>
                 <p>{service.desc}</p>
@@ -148,16 +196,21 @@ const About = () => {
         </div>
       </section>
 
-      {/* Values */}
+      {/* ================= VALUES ================= */}
       <section className="values-section">
         <div className="container">
           <div className="section-header reveal" ref={el => sectionRefs.current[14] = el}>
             <h2>Our <span className="brand-accent">Values</span></h2>
             <p>The principles that guide everything we do</p>
           </div>
+
           <div className="values-grid">
             {values.map((value, idx) => (
-              <div key={idx} className="value-card reveal" ref={el => sectionRefs.current[15 + idx] = el}>
+              <div
+                key={idx}
+                className="value-card reveal"
+                ref={el => sectionRefs.current[15 + idx] = el}
+              >
                 <h3>{value.title}</h3>
                 <p>{value.desc}</p>
               </div>
@@ -166,7 +219,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team */}
+      {/* ================= TEAM ================= */}
       <section className="team-section">
         <div className="container">
           <div className="section-header reveal" ref={el => sectionRefs.current[19] = el}>
@@ -176,13 +229,18 @@ const About = () => {
 
           <div className="team-grid">
             {teamMembers.map((member, idx) => (
-              <div key={idx} className="team-card reveal" ref={el => sectionRefs.current[20 + idx] = el}>
+              <div
+                key={idx}
+                className="team-card reveal"
+                ref={el => sectionRefs.current[20 + idx] = el}
+              >
                 <div className="team-image">
                   <img src={member.image} alt={member.name} />
                   <div className="team-overlay">
                     <p>{member.bio}</p>
                   </div>
                 </div>
+
                 <div className="team-info">
                   <h3>{member.name}</h3>
                   <p className="team-role">{member.role}</p>
@@ -193,13 +251,14 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ================= CTA ================= */}
       <section className="about-cta">
         <div className="cta-floating-shapes">
           <span className="shape shape1"></span>
           <span className="shape shape2"></span>
           <span className="shape shape3"></span>
         </div>
+
         <div className="container">
           <div className="cta-content reveal" ref={el => sectionRefs.current[24] = el}>
             <h2>Ready to Elevate Your Brand?</h2>

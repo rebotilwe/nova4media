@@ -37,6 +37,9 @@
 
 /* Logo */
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 26px;
   font-weight: 900;
   letter-spacing: 1px;
@@ -51,6 +54,14 @@
 
 .logo:hover {
   transform: translateY(-1px);
+}
+
+/* Rounded Logo Image (if you use image later) */
+.navbar-logo {
+  height: 50px;
+  width: auto;
+  border-radius: 14px;
+  object-fit: cover;
 }
 
 /* Nav Links */
@@ -105,14 +116,20 @@
   position: relative;
 }
 
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .dropdown-menu {
   position: absolute;
   top: 55px;
   left: 0;
   background: rgba(0,0,0,0.92);
-  padding: 14px 0;
+  padding: 12px 0;
   border-radius: 16px;
-  min-width: 240px;
+  min-width: 220px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(12px);
   animation: dropdownFade 0.35s ease forwards;
@@ -132,7 +149,7 @@
 
 .dropdown-item {
   display: block;
-  padding: 13px 26px;
+  padding: 12px 26px;
   color: #fff;
   text-decoration: none;
   font-size: 14px;
@@ -234,4 +251,34 @@
   .mobile-toggle {
     display: block;
   }
+}
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Changed from 55px - attaches directly to toggle bottom */
+  left: -8px; /* Small left overlap for seamless hover path */
+  margin-top: 4px; /* Tiny gap with padding tolerance */
+  background: rgba(0,0,0,0.92);
+  padding: 12px 0;
+  border-radius: 16px;
+  min-width: 220px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  animation: dropdownFade 0.35s ease forwards;
+  overflow: hidden;
+  z-index: 1001; /* Ensures above other elements */
+}
+
+/* Hover bridge - invisible padding area */
+.dropdown::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 8px; /* Bridge gap for mouse */
+  z-index: 1000;
 }

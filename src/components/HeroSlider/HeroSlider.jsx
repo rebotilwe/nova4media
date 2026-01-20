@@ -196,7 +196,7 @@ useEffect(() => {
 
                     <div className="button-group">
                       <a 
-                        href="/portfolio" 
+                        href="/projects" 
                         className="btn-magnetic"
                         data-swiper-parallax="-500"
                       >
@@ -210,7 +210,7 @@ useEffect(() => {
                       </a>
                       
                       <a 
-                        href="/contact" 
+                        href="/contactPage" 
                         className="btn-outline-magnetic"
                         data-swiper-parallax="-600"
                       >

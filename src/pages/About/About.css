@@ -510,3 +510,87 @@
     font-size: 2rem;
   }
 }
+/* ================= VIDEO MODAL ================= */
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  animation: scaleIn 0.4s ease forwards;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+
+/* Close button */
+.video-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.7);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.video-close-btn:hover {
+  background: #4a6fa8;
+  transform: scale(1.1);
+}
+
+/* Responsive video wrapper */
+.video-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); }
+  to { transform: scale(1); }
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .video-modal-content {
+    width: 95%;
+  }
+
+  .video-close-btn {
+    width: 38px;
+    height: 38px;
+  }
+}

@@ -1,15 +1,17 @@
 import React from "react";
 import "./Footer.css";
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import logo from "../../assets/images/logo5.jpg";
 
 function Footer() {
   return (
     <footer className="footer">
+      <div className="footer-overlay"></div>
       <div className="container footer-grid">
 
         {/* Brand */}
         <div className="footer-brand">
-          <h3 className="footer-logo">Nova4Media</h3>
+          <img src={logo} alt="Nova4Media Logo" className="footer-logo-img" />
           <p>
             Capturing moments that matter. We create visual stories through
             professional photography and creative storytelling.
@@ -50,7 +52,7 @@ function Footer() {
           <h4>Contact</h4>
           <ul>
             <li>📍 123 Nova Street, Northcliff, Johannesburg, South Africa</li>
-            <li>📞+27 78 152 6754</li>
+            <li>📞 +27 78 152 6754</li>
             <li>✉️ info@nova4media.co.za</li>
           </ul>
         </div>
@@ -58,11 +60,22 @@ function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="footer-bottom">
-        <p>
-          © {new Date().getFullYear()} Photia Studio. All rights reserved.
-        </p>
-      </div>
+     <div className="footer-bottom">
+  <p>
+    © {new Date().getFullYear()} Nova4Media. All rights reserved. 
+    <span className="divider">|</span>
+    Developed by{" "}
+    <a
+      href="https://afribizconnect.co.za"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="footer-dev"
+    >
+      Afribiz Connect
+    </a>
+  </p>
+</div>
+
     </footer>
   );
 }

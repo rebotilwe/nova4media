@@ -5,6 +5,7 @@ import "./RecentProjects.css";
 const projects = [
   {
     id: 1,
+    type: "image",
     title: "Luxury Wedding Photography",
     category: "Events",
     year: "2024",
@@ -12,40 +13,31 @@ const projects = [
       "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&auto=format&fit=crop",
   },
   {
+    id: 101,
+    type: "video",
+    title: "Nova Media Highlight",
+    category: "Videos",
+    year: "2025",
+    videoUrl: "https://youtu.be/tQDCKRifSNA",
+  },
+  {
     id: 2,
+    type: "image",
     title: "Fashion Editorial Shoot",
     category: "Fashion",
     year: "2025",
     image:
       "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=1200&auto=format&fit=crop",
   },
-  {
-    id: 3,
-    title: "Commercial Brand Campaign",
-    category: "Commercial",
-    year: "2025",
-    image:
-      "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1200&auto=format&fit=crop",
-  },
-  {
-    id: 4,
-    title: "Creative Portrait Session",
-    category: "Portrait",
-    year: "2024",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1200&auto=format&fit=crop",
-  },
 ];
 
-const categories = ["All", "Events", "Fashion", "Commercial", "Portrait"];
+const getYouTubeId = (url) => {
+  if (!url) return "";
+  return url.split("youtu.be/")[1] || url.split("v=")[1];
+};
 
 function RecentProjects() {
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const filtered =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
+  const [activeVideo, setActiveVideo] = useState(null);
 
   return (
     <section className="recent-projects">
@@ -57,45 +49,39 @@ function RecentProjects() {
             Recent <span>Projects</span>
           </h2>
           <p>
-            A curated selection of our latest photography and visual storytelling
-            projects crafted with passion and precision.
+            A preview of our latest photography and videography projects.
           </p>
-        </div>
-
-        {/* Filters */}
-        <div className="filter-row">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`filter-btn ${
-                activeCategory === cat ? "active" : ""
-              }`}
-              onClick={() => setActiveCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
         </div>
 
         {/* Grid */}
         <div className="projects-grid">
-          {filtered.map((project) => (
-            <div key={project.id} className="project-card">
-              <div className="image-wrapper">
-                <img src={project.image} alt={project.title} />
-              </div>
+          {projects.map((project) => {
+            const isVideo = project.type === "video";
+            const videoId = isVideo ? getYouTubeId(project.videoUrl) : null;
+            const thumbnail = isVideo
+              ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+              : project.image;
 
-              <div className="project-overlay">
-                <span className="category">{project.category}</span>
-                <h3>{project.title}</h3>
-                <span className="year">{project.year}</span>
+            return (
+              <div
+                key={project.id}
+                className={`project-card ${isVideo ? "video-card" : ""}`}
+                onClick={() => isVideo && setActiveVideo(videoId)}
+              >
+                <div className="image-wrapper">
+                  <img src={thumbnail} alt={project.title} />
 
-                <button className="view-btn">
-                  View Project →
-                </button>
+                  {isVideo && <div className="play-overlay">▶</div>}
+                </div>
+
+                <div className="project-overlay">
+                  <span className="category">{project.category}</span>
+                  <h3>{project.title}</h3>
+                  <span className="year">{project.year}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* CTA */}
@@ -105,6 +91,31 @@ function RecentProjects() {
           </a>
         </div>
       </div>
+
+      {/* VIDEO MODAL */}
+      {activeVideo && (
+        <div className="video-modal" onClick={() => setActiveVideo(null)}>
+          <div
+            className="video-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="close-btn"
+              onClick={() => setActiveVideo(null)}
+            >
+              ✕
+            </button>
+
+            <iframe
+              src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1`}
+              title="Video Player"
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
