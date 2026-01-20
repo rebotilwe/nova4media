@@ -136,20 +136,23 @@
   color: #cfd5e1;
 }
 
-.choose-btn {
-  background: linear-gradient(90deg, #4a6fa8, #9fc1f3);
-  color: #000;
-  font-weight: 700;
-  padding: 12px 28px;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
+.contact-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 30px;
+  border-radius: 50px;
+  background: #4a6fa8;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
-.choose-btn:hover {
-  background: linear-gradient(90deg, #6c85c1, #b2c7f5);
+
+.contact-btn:hover {
+  background: #5a7fb8;
   transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(74, 111, 168, 0.3);
 }
 
 /* Responsive */

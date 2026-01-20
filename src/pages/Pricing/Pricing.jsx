@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Pricing.css";
 
 function Pricing() {
@@ -59,7 +60,10 @@ function Pricing() {
                   <li key={idx}>{feat}</li>
                 ))}
               </ul>
-              <button className="choose-btn">Choose Plan</button>
+              {/* Link button to contactPage */}
+              <Link to="/contactPage" className="contact-btn">
+                Contact Us
+              </Link>
             </div>
           ))}
         </div>
