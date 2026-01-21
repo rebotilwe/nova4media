@@ -3,46 +3,32 @@ import './Team.css';
 import { FaInstagram, FaLinkedin, FaTwitter, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 function Team() {
-const teamMembers = [
-  {
-    id: 1,
-    name: 'Matt Kabus',
-    role: 'CEO & Founder',
-    photo: 'https://randomuser.me/api/portraits/men/32.jpg'
-  },
-  {
-    id: 2,
-    name: 'Ishraq Khan',
-    role: 'Business Development',
-    photo: 'https://randomuser.me/api/portraits/men/45.jpg'
-  },
-  {
-    id: 3,
-    name: 'John Dosh',
-    role: 'Strategy Consultant',
-    photo: 'https://randomuser.me/api/portraits/men/56.jpg'
-  },
-  {
-    id: 4,
-    name: 'Daniyal Micle',
-    role: 'Business Development',
-    photo: 'https://randomuser.me/api/portraits/men/67.jpg'
-  }
-];
+  const teamMembers = [
+    { id: 1, name: 'Matt Kabus', role: 'CEO & Founder', photo: 'https://randomuser.me/api/portraits/men/32.jpg' },
+    { id: 2, name: 'Ishraq Khan', role: 'Business Development', photo: 'https://randomuser.me/api/portraits/men/45.jpg' },
+    { id: 3, name: 'John Dosh', role: 'Strategy Consultant', photo: 'https://randomuser.me/api/portraits/men/56.jpg' },
+    { id: 4, name: 'Daniyal Micle', role: 'Business Development', photo: 'https://randomuser.me/api/portraits/men/67.jpg' }
+  ];
 
   const carouselRef = useRef(null);
   const [hoveredMember, setHoveredMember] = useState(null);
 
   const scroll = (direction) => {
     if (carouselRef.current) {
-      const cardWidth = 240; // Approximate card width on mobile
-      const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
-      carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      const cardWidth = 260; // Adjusted for spacing
+      carouselRef.current.scrollBy({ left: direction === 'left' ? -cardWidth : cardWidth, behavior: 'smooth' });
     }
   };
 
   return (
     <section id="team" className="team-section">
+      {/* Floating blurred circles for depth */}
+      <div className="floating-elements-team">
+        <div className="circle t-circle-1"></div>
+        <div className="circle t-circle-2"></div>
+        <div className="circle t-circle-3"></div>
+      </div>
+
       <div className="container">
         <div className="section-header">
           <span className="section-label">OUR PROFESSIONAL TEAM</span>
@@ -54,6 +40,7 @@ const teamMembers = [
           </p>
         </div>
 
+        {/* Desktop grid */}
         <div className="team-grid-desktop">
           {teamMembers.map(member => (
             <div 
@@ -66,9 +53,9 @@ const teamMembers = [
                 <img src={member.photo} alt={member.name} />
                 <div className="avatar-overlay">
                   <div className="social-links">
-                    <a href="#" aria-label="Instagram"><FaInstagram /></a>
-                    <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
-                    <a href="#" aria-label="Twitter"><FaTwitter /></a>
+                    <a href="#"><FaInstagram /></a>
+                    <a href="#"><FaLinkedin /></a>
+                    <a href="#"><FaTwitter /></a>
                   </div>
                 </div>
               </div>
@@ -80,6 +67,7 @@ const teamMembers = [
           ))}
         </div>
 
+        {/* Mobile carousel */}
         <div className="carousel-wrapper">
           <button className="carousel-arrow left" onClick={() => scroll('left')} aria-label="Previous">
             <FaChevronLeft />
@@ -95,9 +83,9 @@ const teamMembers = [
                 <div className="member-avatar">
                   <img src={member.photo} alt={member.name} />
                   <div className="overlay">
-                    <a href="#" aria-label="Instagram"><FaInstagram /></a>
-                    <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
-                    <a href="#" aria-label="Twitter"><FaTwitter /></a>
+                    <a href="#"><FaInstagram /></a>
+                    <a href="#"><FaLinkedin /></a>
+                    <a href="#"><FaTwitter /></a>
                   </div>
                 </div>
                 <div className="member-info">

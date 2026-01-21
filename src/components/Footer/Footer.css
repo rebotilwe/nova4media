@@ -9,12 +9,12 @@
   position: relative;
   background: var(--footer-bg);
   color: #ccc;
-  padding: 60px 20px 30px; /* reduced from 100px top to 60px */
+  padding: 60px 20px 30px;
   overflow: hidden;
   font-family: "Poppins", sans-serif;
 }
 
-/* Animated Gradient Background */
+/* Gradient Background */
 .footer::before {
   content: "";
   position: absolute;
@@ -22,21 +22,49 @@
   background: linear-gradient(270deg, #4a6fa8, #9cff00, #4a6fa8);
   background-size: 600% 600%;
   animation: gradientShift 20s ease infinite;
-  opacity: 0.04; /* subtle effect */
+  opacity: 0.04;
   pointer-events: none;
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Overlay */
+.footer-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--footer-overlay);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Footer Particles */
+.footer-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.footer-particles span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: particleMove 15s infinite linear;
+}
+
+@keyframes particleMove {
+  0% { transform: translateY(0); opacity: 0.2; }
+  50% { transform: translateY(-50vh); opacity: 0.4; }
+  100% { transform: translateY(-100vh); opacity: 0.2; }
 }
 
 /* Footer Grid */
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 50px; /* slightly reduced spacing */
+  gap: 50px;
   max-width: 1320px;
   margin: auto;
   position: relative;
@@ -46,7 +74,7 @@
 
 /* Brand Section */
 .footer-logo-img {
-  width: 160px; /* smaller to reduce height */
+  width: 160px;
   height: auto;
   border-radius: 16px;
   margin-bottom: 14px;
@@ -79,6 +107,7 @@
   display: flex;
   gap: 14px;
   margin-top: 18px;
+  position: relative;
 }
 
 .footer-socials a {
@@ -94,6 +123,23 @@
   opacity: 0;
   transform: translateY(20px);
   animation: floatIn 0.6s ease forwards;
+  position: relative;
+}
+
+.footer-socials a::after {
+  content: "✨";
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 10px;
+  opacity: 0;
+  transform: scale(0);
+  transition: 0.3s ease;
+}
+
+.footer-socials a:hover::after {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .footer-socials a:nth-child(1) { animation-delay: 0.4s; }
@@ -104,7 +150,6 @@
 .footer-socials a:hover {
   background: var(--accent-color);
   border-color: var(--accent-color);
-  color: #fff;
   transform: translateY(-3px) scale(1.1);
 }
 
@@ -128,7 +173,6 @@
 .footer-column li {
   margin-bottom: 12px;
   font-size: 0.9rem;
-  opacity: 0.85;
   transition: 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
@@ -174,6 +218,12 @@
 @keyframes floatIn {
   0% { opacity: 0; transform: translateY(20px) scale(0.95); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Responsive */

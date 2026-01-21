@@ -6,7 +6,20 @@ import logo from "../../assets/images/logo5.jpg";
 function Footer() {
   return (
     <footer className="footer">
+      {/* Floating particles */}
+      <div className="footer-particles">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <span key={i} style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 5}s`
+          }} />
+        ))}
+      </div>
+
+      {/* Overlay */}
       <div className="footer-overlay"></div>
+
       <div className="container footer-grid">
 
         {/* Brand */}
@@ -60,22 +73,21 @@ function Footer() {
       </div>
 
       {/* Bottom Bar */}
-     <div className="footer-bottom">
-  <p>
-    © {new Date().getFullYear()} Nova4Media. All rights reserved. 
-    <span className="divider">|</span>
-    Developed by{" "}
-    <a
-      href="https://afribizconnect.co.za"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="footer-dev"
-    >
-      Afribiz Connect
-    </a>
-  </p>
-</div>
-
+      <div className="footer-bottom">
+        <p>
+          © {new Date().getFullYear()} Nova4Media. All rights reserved. 
+          <span className="divider">|</span>
+          Developed by{" "}
+          <a
+            href="https://afribizconnect.co.za"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-dev"
+          >
+            Afribiz Connect
+          </a>
+        </p>
+      </div>
     </footer>
   );
 }

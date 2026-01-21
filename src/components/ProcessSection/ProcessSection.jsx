@@ -2,46 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import './ProcessSection.css';
 
 const processSteps = [
-  {
-    id: 1,
-    number: '01',
-    title: 'Discovery & Planning',
-    description: 'We begin by understanding your vision, goals, and requirements to create a tailored strategy.',
-    icon: '🔍',
-    color: '#4a6fa8'
-  },
-  {
-    id: 2,
-    number: '02',
-    title: 'Concept Development',
-    description: 'Creative brainstorming and concept creation to bring your vision to life visually.',
-    icon: '💡',
-    color: '#e74c3c'
-  },
-  {
-    id: 3,
-    number: '03',
-    title: 'Production & Shooting',
-    description: 'Professional photography and videography execution with top-tier equipment.',
-    icon: '📸',
-    color: '#2ecc71'
-  },
-  {
-    id: 4,
-    number: '04',
-    title: 'Editing & Refinement',
-    description: 'Post-production magic with careful editing, color grading, and retouching.',
-    icon: '🎨',
-    color: '#9b59b6'
-  },
-  {
-    id: 5,
-    number: '05',
-    title: 'Delivery & Support',
-    description: 'Final delivery of assets and ongoing support to ensure your complete satisfaction.',
-    icon: '🚀',
-    color: '#f39c12'
-  }
+  { id: 1, number: '01', title: 'Discovery & Planning', description: 'We begin by understanding your vision, goals, and requirements to create a tailored strategy.', icon: '🔍', color: '#4a6fa8' },
+  { id: 2, number: '02', title: 'Concept Development', description: 'Creative brainstorming and concept creation to bring your vision to life visually.', icon: '💡', color: '#e74c3c' },
+  { id: 3, number: '03', title: 'Production & Shooting', description: 'Professional photography and videography execution with top-tier equipment.', icon: '📸', color: '#2ecc71' },
+  { id: 4, number: '04', title: 'Editing & Refinement', description: 'Post-production magic with careful editing, color grading, and retouching.', icon: '🎨', color: '#9b59b6' },
+  { id: 5, number: '05', title: 'Delivery & Support', description: 'Final delivery of assets and ongoing support to ensure your complete satisfaction.', icon: '🚀', color: '#f39c12' }
 ];
 
 function ProcessSection() {
@@ -51,9 +16,7 @@ function ProcessSection() {
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
+          if (entry.isIntersecting) entry.target.classList.add('visible');
         });
       },
       { threshold: 0.2 }
@@ -67,7 +30,7 @@ function ProcessSection() {
   }, []);
 
   return (
-    <div className="process-section">
+    <section className="process-section">
       <div className="floating-elements-process">
         <div className="circle circle-1"></div>
         <div className="circle circle-2"></div>
@@ -122,7 +85,7 @@ function ProcessSection() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

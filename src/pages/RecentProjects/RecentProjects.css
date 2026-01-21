@@ -1,4 +1,8 @@
-/* RecentProjects.css - Homepage Preview Version */
+:root {
+  --accent-color: #9cff00;
+}
+
+/* Section wrapper */
 .recent-projects {
   background: #050505;
   color: #fff;
@@ -19,58 +23,61 @@
 /* Section Header */
 .section-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
 }
 
 .section-tag {
   display: inline-block;
   font-size: 12px;
   letter-spacing: 2px;
-  color: var(--accent-color, #9cff00);
-  margin-bottom: 12px;
+  color: var(--accent-color);
+  margin-bottom: 10px;
   text-transform: uppercase;
   font-weight: 700;
 }
 
 .section-header h2 {
-  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 900;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .section-header h2 span {
-  color: var(--accent-color, #9cff00);
+  color: var(--accent-color);
 }
 
 .section-header p {
   max-width: 640px;
   margin: 0 auto;
   color: #aaa;
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.5;
 }
 
-/* Projects Grid - Preview */
+/* Projects Grid */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
 }
 
 /* Project Card */
 .project-card {
   position: relative;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  aspect-ratio: 4/3;
+
+  aspect-ratio: 5/4; /* more compact */
+  max-height: 260px;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
 .image-wrapper {
@@ -97,7 +104,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
   pointer-events: none;
@@ -109,7 +116,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 16px;
+  padding: 12px;
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.85),
@@ -119,40 +126,40 @@
 }
 
 .project-overlay .category {
-  font-size: 0.75rem;
-  color: var(--accent-color, #9cff00);
+  font-size: 0.7rem;
+  color: var(--accent-color);
   text-transform: uppercase;
   font-weight: 600;
 }
 
 .project-overlay h3 {
-  margin: 4px 0;
-  font-size: 1rem;
+  margin: 3px 0;
+  font-size: 0.95rem;
   font-weight: 700;
 }
 
 .project-overlay .year {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #ccc;
 }
 
 /* CTA Button */
 .projects-cta {
-  margin-top: 40px;
+  margin-top: 30px;
   text-align: center;
 }
 
 .primary-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 28px;
+  gap: 8px;
+  padding: 10px 24px;
   border-radius: 999px;
   background: #fff;
   color: #000;
   font-weight: 800;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
   border: 2px solid transparent;
   position: relative;
@@ -160,9 +167,9 @@
 }
 
 .primary-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-  border-color: var(--accent-color, #9cff00);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border-color: var(--accent-color);
 }
 
 /* Video Modal */
@@ -210,10 +217,10 @@
 @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
 
   .video-card .play-overlay {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }

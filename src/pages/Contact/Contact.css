@@ -1,9 +1,6 @@
-/* ------------------------------
-  Contact Section - Snug to Footer
--------------------------------- */
 .contact-cta-section {
   position: relative;
-  padding: 100px 0 40px; /* less bottom padding for snug fit */
+  padding: 100px 0 40px;
   background: radial-gradient(circle at top, #111 0%, #000 60%);
   overflow: hidden;
   opacity: 0;
@@ -16,19 +13,27 @@
   transform: translateY(0);
 }
 
-.contact-cta-section::after {
+/* Shimmer background */
+.contact-cta-section::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+  background: linear-gradient(135deg, rgba(74,111,168,0.1), rgba(107,147,214,0.05), rgba(74,111,168,0.1));
+  animation: shimmerBg 8s linear infinite;
   pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes shimmerBg {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
 }
 
 /* Content */
 .cta-content {
   text-align: center;
   max-width: 780px;
-  margin: 0 auto; /* removed bottom margin */
+  margin: 0 auto;
   position: relative;
   z-index: 2;
 }
@@ -73,7 +78,7 @@
   font-size: 1.2rem;
   color: rgba(255,255,255,0.7);
   line-height: 1.6;
-  margin-bottom: 40px; /* reduced from 55px */
+  margin-bottom: 40px;
 }
 
 /* Buttons */
@@ -95,9 +100,7 @@
   transition: 0.3s ease;
 }
 
-.btn-primary:hover {
-  transform: translateY(-4px);
-}
+.btn-primary:hover { transform: translateY(-4px); }
 
 .btn-sparkle {
   position: absolute;
@@ -133,7 +136,7 @@
   transform: translateY(-4px);
 }
 
-/* Stats (if used) */
+/* Stats */
 .cta-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -141,13 +144,28 @@
   max-width: 900px;
   margin: auto;
   border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 50px; /* reduced from 70px */
-  padding-bottom: 0; /* remove extra bottom space */
+  padding-top: 50px;
   position: relative;
   z-index: 2;
 }
 
-/* Floating Circles & Particles */
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--accent-color);
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.7);
+  margin-top: 6px;
+}
+
+/* Floating Circles */
 .floating-elements {
   position: absolute;
   inset: 0;
@@ -161,35 +179,15 @@
   animation: float 25s linear infinite;
 }
 
-.floating-circle:nth-child(1) {
-  width: 220px;
-  height: 220px;
-  top: 10%;
-  left: 10%;
-}
-
-.floating-circle:nth-child(2) {
-  width: 160px;
-  height: 160px;
-  bottom: 20%;
-  right: 15%;
-  animation-duration: 30s;
-}
-
-.floating-circle:nth-child(3) {
-  width: 110px;
-  height: 110px;
-  top: 50%;
-  left: 75%;
-  animation-duration: 35s;
-}
+.floating-circle-1 { width: 220px; height: 220px; top: 10%; left: 10%; }
+.floating-circle-2 { width: 160px; height: 160px; bottom: 20%; right: 15%; animation-duration: 30s; }
+.floating-circle-3 { width: 110px; height: 110px; top: 50%; left: 75%; animation-duration: 35s; }
 
 @keyframes float {
-  50% {
-    transform: translate(80px, -80px);
-  }
+  50% { transform: translate(80px, -80px); }
 }
 
+/* Particles */
 .particle-bg {
   position: absolute;
   inset: 0;
@@ -207,33 +205,14 @@
 }
 
 @keyframes particleMove {
-  from {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(-120vh);
-    opacity: 0.6;
-  }
+  from { transform: translateY(0); opacity: 0; }
+  to { transform: translateY(-120vh); opacity: 0.6; }
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .contact-cta-section {
-    padding: 80px 0 30px; /* snug bottom for mobile */
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-  }
-
-  .cta-stats {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding-top: 40px;
-  }
-
-  .floating-circle {
-    display: none;
-  }
+  .contact-cta-section { padding: 80px 0 30px; }
+  .cta-buttons { flex-direction: column; }
+  .cta-stats { grid-template-columns: 1fr; gap: 30px; padding-top: 40px; }
+  .floating-circle { display: none; }
 }

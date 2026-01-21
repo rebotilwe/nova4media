@@ -1,4 +1,3 @@
-// components/RecentProjects/RecentProjects.jsx
 import React, { useState } from "react";
 import "./RecentProjects.css";
 
@@ -70,7 +69,6 @@ function RecentProjects() {
               >
                 <div className="image-wrapper">
                   <img src={thumbnail} alt={project.title} />
-
                   {isVideo && <div className="play-overlay">▶</div>}
                 </div>
 

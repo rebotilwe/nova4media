@@ -318,3 +318,42 @@
 .testimonial-featured {
   animation: fadeInUp 0.8s ease-out;
 }
+/* Floating circles in background */
+.floating-elements-testimonials {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.floating-elements-testimonials .circle {
+  position: absolute;
+  border-radius: 50%;
+  background: #4a6fa8;
+  opacity: 0.05;
+  filter: blur(80px);
+}
+
+.t-circle-1 { width: 300px; height: 300px; top: 10%; left: 5%; animation: floatCircle 25s linear infinite; }
+.t-circle-2 { width: 250px; height: 250px; bottom: 15%; right: 10%; animation: floatCircle 30s linear infinite reverse; }
+.t-circle-3 { width: 150px; height: 150px; top: 50%; left: 70%; animation: floatCircle 35s linear infinite; }
+
+/* Fade-in effect for small cards */
+.testimonial-card-small {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.testimonial-card-small:nth-child(1) { animation-delay: 0.1s; }
+.testimonial-card-small:nth-child(2) { animation-delay: 0.3s; }
+.testimonial-card-small:nth-child(3) { animation-delay: 0.5s; }
+
+/* Optional hover glow for featured card */
+.testimonial-featured:hover {
+  box-shadow: 0 40px 80px rgba(74, 111, 168, 0.5);
+  transform: translateY(-12px) scale(1.02);
+}

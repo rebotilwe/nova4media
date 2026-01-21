@@ -1,10 +1,10 @@
-// components/ContactSection/ContactSection.jsx
 import React, { useEffect, useRef } from "react";
 import "./Contact.css";
 
 function ContactSection() {
   const sectionRef = useRef(null);
   const numberRefs = useRef([]);
+  const floatingRefs = useRef([]);
 
   useEffect(() => {
     const animateValue = (element, start, end, duration) => {
@@ -29,6 +29,7 @@ function ContactSection() {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
 
+          // Animate numbers
           numberRefs.current.forEach((ref) => {
             if (ref) {
               const finalValue = parseInt(ref.dataset.count, 10);
@@ -44,16 +45,33 @@ function ContactSection() {
 
     if (sectionRef.current) observer.observe(sectionRef.current);
 
-    return () => observer.disconnect();
+    // Floating circle parallax
+    const handleScroll = () => {
+      floatingRefs.current.forEach((circle, index) => {
+        if (circle) {
+          const speed = (index + 1) * 0.15; // different speeds
+          circle.style.transform = `translateY(${window.scrollY * speed}px)`;
+        }
+      });
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
     <section ref={sectionRef} className="contact-cta-section">
-      {/* Floating background */}
+      {/* Shimmer + floating circles */}
       <div className="floating-elements">
-        <span className="floating-circle" />
-        <span className="floating-circle" />
-        <span className="floating-circle" />
+        {[...Array(3)].map((_, i) => (
+          <span
+            key={i}
+            className={`floating-circle floating-circle-${i + 1}`}
+            ref={(el) => (floatingRefs.current[i] = el)}
+          />
+        ))}
       </div>
 
       <div className="particle-bg">
@@ -91,7 +109,7 @@ function ContactSection() {
         </div>
 
         {/* Stats */}
-        {/* <div className="cta-stats">
+        <div className="cta-stats">
           {[
             { label: "Projects Completed", value: 150 },
             { label: "Happy Clients", value: 98 },
@@ -108,7 +126,7 @@ function ContactSection() {
               <div className="stat-label">{stat.label}</div>
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </section>
   );
