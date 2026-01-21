@@ -1,44 +1,45 @@
-// HeroSliderPhotiaStyle.jsx
-import { useState, useEffect, useRef } from "react";
+// HeroSliderPhotia.jsx
+import { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay, Pagination, EffectFade } from "swiper/modules";
+import { Navigation, Autoplay, Pagination, EffectFade, EffectCreative } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+import "swiper/css/effect-creative";
 import "./HeroSlider.css";
 
 const slides = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1920&h=1080&fit=crop&auto=format",
-    title: "Professional Photography",
-    subtitle: "Capturing moments that last a lifetime",
+    type: "image",
+    src: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1920&h=1080&fit=crop&auto=format",
+    title: ["Professional", "Photography"],
+    subtitle: ["Capturing moments", "that last a lifetime"],
     description: "Expert photography services for weddings, events, and portraits",
-    buttonText: "View Portfolio",
-    accentColor: "#c9a96e" // Photia-style gold/beige
+    buttonText: "View Portfolio"
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1920&h=1080&fit=crop&auto=format",
-    title: "Creative Vision",
-    subtitle: "Transforming scenes into memories",
+    type: "video",
+    src: "https://www.w3schools.com/html/mov_bbb.mp4",
+    title: ["Creative", "Vision"],
+    subtitle: ["Transforming scenes", "into memories"],
     description: "Bringing your creative ideas to life with professional expertise",
-    buttonText: "Our Services",
-    accentColor: "#c9a96e"
+    buttonText: "Our Services"
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1510127034890-ba27508e9f1c?w=1920&h=1080&fit=crop&auto=format",
-    title: "Perfect Moments",
-    subtitle: "Where memories are made",
+    type: "image",
+    src: "https://images.unsplash.com/photo-1510127034890-ba27508e9f1c?w=1920&h=1080&fit=crop&auto=format",
+    title: ["Perfect", "Moments"],
+    subtitle: ["Where memories", "are made"],
     description: "Professional studio and outdoor photography sessions",
-    buttonText: "Book Session",
-    accentColor: "#c9a96e"
+    buttonText: "Book Session"
   },
 ];
 
-function HeroSlider() {
+function HeroSliderPhotia() {
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
 
@@ -50,49 +51,68 @@ function HeroSlider() {
     <section className="hero-slider-photia">
       <Swiper
         ref={swiperRef}
-        modules={[Navigation, Autoplay, Pagination, EffectFade]}
+        modules={[Navigation, Autoplay, Pagination, EffectFade, EffectCreative]}
         effect="fade"
+        creativeEffect={{
+          prev: { translate: ["-100%", 0, -400] },
+          next: { translate: ["100%", 0, -400] },
+        }}
         speed={1200}
         slidesPerView={1}
+        loop
         navigation={{
-          nextEl: '.swiper-button-next-photia',
-          prevEl: '.swiper-button-prev-photia',
+          nextEl: ".swiper-button-next-photia",
+          prevEl: ".swiper-button-prev-photia",
         }}
         pagination={{
           clickable: true,
-          el: '.swiper-pagination-photia',
-          bulletClass: 'photia-bullet',
-          bulletActiveClass: 'photia-bullet-active',
+          el: ".swiper-pagination-photia",
+          bulletClass: "photia-bullet",
+          bulletActiveClass: "photia-bullet-active",
         }}
-        autoplay={{ 
+        autoplay={{
           delay: 8000,
           disableOnInteraction: false,
         }}
-        loop
         onSlideChange={handleSlideChange}
         className="hero-swiper-photia"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
             <div className="slide-container-photia">
-              {/* Background Image with subtle overlay */}
+              {/* Background: Image or Video */}
               <div className="image-background">
-                <img 
-                  src={slide.image} 
-                  alt={slide.title}
-                  className="slide-bg-photia"
-                />
+                {slide.type === "image" && (
+                  <img src={slide.src} alt="slide.title" className="slide-bg-photia" />
+                )}
+                {slide.type === "video" && (
+                  <video
+                    src={slide.src}
+                    className="slide-bg-photia"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                )}
                 <div className="gradient-overlay-photia"></div>
               </div>
 
-              {/* Subtle Branding - NOT too bold */}
+              {/* Floating decorative circles */}
+              <div className="floating-circles">
+                <span className="circle circle1"></span>
+                <span className="circle circle2"></span>
+                <span className="circle circle3"></span>
+              </div>
+
+              {/* Brand Watermark */}
               <div className="brand-watermark">
                 <span className="brand-text">NOVA</span>
                 <span className="brand-number">4</span>
                 <span className="brand-text">MEDIA</span>
               </div>
 
-              {/* Main Content */}
+              {/* Slide Content */}
               <div className="slide-content-photia">
                 <div className="content-wrapper-photia">
                   {/* Pre-title */}
@@ -101,30 +121,41 @@ function HeroSlider() {
                     <span className="pre-title-text">WELCOME TO STUDIO</span>
                   </div>
 
-                  {/* Main Title */}
+                  {/* Title with staggered animation */}
                   <h1 className="slide-title-photia">
-                    {slide.title}
+                    {slide.title.map((line, index) => (
+                      <span
+                        key={index}
+                        style={{ display: "block", animationDelay: `${0.5 + index * 0.2}s` }}
+                      >
+                        {line}
+                      </span>
+                    ))}
                   </h1>
 
-                  {/* Subtitle */}
+                  {/* Subtitle with staggered animation */}
                   <h2 className="slide-subtitle-photia">
-                    {slide.subtitle}
+                    {slide.subtitle.map((line, index) => (
+                      <span
+                        key={index}
+                        style={{ display: "block", animationDelay: `${0.7 + index * 0.2}s` }}
+                      >
+                        {line}
+                      </span>
+                    ))}
                   </h2>
 
                   {/* Description */}
-                  <p className="slide-description-photia">
-                    {slide.description}
-                  </p>
+                  <p className="slide-description-photia">{slide.description}</p>
 
                   {/* Buttons */}
                   <div className="button-group-photia">
                     <a href="/portfolio" className="btn-primary-photia">
                       <span>{slide.buttonText}</span>
                       <svg className="btn-arrow-photia" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2"/>
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" />
                       </svg>
                     </a>
-                    
                     <a href="/contact" className="btn-secondary-photia">
                       <span>Get in Touch</span>
                       <div className="btn-line"></div>
@@ -146,17 +177,17 @@ function HeroSlider() {
         {/* Navigation Arrows */}
         <div className="swiper-button-prev-photia">
           <svg viewBox="0 0 24 24" fill="none">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2"/>
+            <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" />
           </svg>
         </div>
         <div className="swiper-button-next-photia">
           <svg viewBox="0 0 24 24" fill="none">
-            <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2"/>
+            <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" />
           </svg>
         </div>
       </Swiper>
 
-      {/* Photia-style Pagination */}
+      {/* Pagination */}
       <div className="swiper-pagination-photia"></div>
 
       {/* Scroll Indicator */}
@@ -168,4 +199,4 @@ function HeroSlider() {
   );
 }
 
-export default HeroSlider;
+export default HeroSliderPhotia;
