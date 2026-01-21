@@ -1,278 +1,171 @@
-// HeroSliderEnhanced.jsx
+// HeroSliderPhotiaStyle.jsx
 import { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay, Pagination, EffectFade, Parallax } from "swiper/modules";
+import { Navigation, Autoplay, Pagination, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import "swiper/css/parallax";
 import "./HeroSlider.css";
 
 const slides = [
   {
     id: 1,
     image: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1920&h=1080&fit=crop&auto=format",
-    video: "https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-camera-taking-a-photo-41475-large.mp4", // Optional video
     title: "Professional Photography",
-    subtitle: "Capturing moments that last a lifetime with expert photography services",
+    subtitle: "Capturing moments that last a lifetime",
+    description: "Expert photography services for weddings, events, and portraits",
     buttonText: "View Portfolio",
-    accentColor: "#4a6fa8"
+    accentColor: "#c9a96e" // Photia-style gold/beige
   },
   {
     id: 2,
     image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1920&h=1080&fit=crop&auto=format",
     title: "Creative Vision",
-    subtitle: "Transforming ordinary scenes into extraordinary memories",
+    subtitle: "Transforming scenes into memories",
+    description: "Bringing your creative ideas to life with professional expertise",
     buttonText: "Our Services",
-    accentColor: "#e74c3c"
+    accentColor: "#c9a96e"
   },
   {
     id: 3,
     image: "https://images.unsplash.com/photo-1510127034890-ba27508e9f1c?w=1920&h=1080&fit=crop&auto=format",
     title: "Perfect Moments",
-    subtitle: "Professional photography for weddings, events, and portraits",
+    subtitle: "Where memories are made",
+    description: "Professional studio and outdoor photography sessions",
     buttonText: "Book Session",
-    accentColor: "#2ecc71"
+    accentColor: "#c9a96e"
   },
 ];
 
-function HeroSliderEnhanced() {
+function HeroSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [scrollProgress, setScrollProgress] = useState(0);
   const swiperRef = useRef(null);
-
-  // Mouse move effect for parallax
-useEffect(() => {
-  if (window.innerWidth < 768) return;
-
-  const handleMouseMove = (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 30;
-    const y = (e.clientY / window.innerHeight - 0.5) * 30;
-    setMousePosition({ x, y });
-  };
-
-  window.addEventListener("mousemove", handleMouseMove);
-  return () => window.removeEventListener("mousemove", handleMouseMove);
-}, []);
-
-
-  // Scroll progress
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const currentScroll = window.scrollY;
-      setScrollProgress((currentScroll / totalScroll) * 100);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleSlideChange = (swiper) => {
     setActiveIndex(swiper.realIndex);
-    // Add color transition effect
-    document.documentElement.style.setProperty('--accent-color', slides[swiper.realIndex].accentColor);
   };
 
   return (
-    <>
-      <section className="hero-slider-enhanced">
-        {/* Particle Background */}
-        <div className="particles"></div>
-        
-        {/* Custom Cursor */}
-        <div 
-          className="custom-cursor"
-          style={{ 
-            left: `${mousePosition.x + 50}%`,
-            top: `${mousePosition.y + 50}%`
-          }}
-        ></div>
+    <section className="hero-slider-photia">
+      <Swiper
+        ref={swiperRef}
+        modules={[Navigation, Autoplay, Pagination, EffectFade]}
+        effect="fade"
+        speed={1200}
+        slidesPerView={1}
+        navigation={{
+          nextEl: '.swiper-button-next-photia',
+          prevEl: '.swiper-button-prev-photia',
+        }}
+        pagination={{
+          clickable: true,
+          el: '.swiper-pagination-photia',
+          bulletClass: 'photia-bullet',
+          bulletActiveClass: 'photia-bullet-active',
+        }}
+        autoplay={{ 
+          delay: 8000,
+          disableOnInteraction: false,
+        }}
+        loop
+        onSlideChange={handleSlideChange}
+        className="hero-swiper-photia"
+      >
+        {slides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+            <div className="slide-container-photia">
+              {/* Background Image with subtle overlay */}
+              <div className="image-background">
+                <img 
+                  src={slide.image} 
+                  alt={slide.title}
+                  className="slide-bg-photia"
+                />
+                <div className="gradient-overlay-photia"></div>
+              </div>
 
-        {/* Progress Bar */}
-        <div className="scroll-progress">
-          <div className="progress-bar" style={{ width: `${scrollProgress}%` }}></div>
-        </div>
+              {/* Subtle Branding - NOT too bold */}
+              <div className="brand-watermark">
+                <span className="brand-text">NOVA</span>
+                <span className="brand-number">4</span>
+                <span className="brand-text">MEDIA</span>
+              </div>
 
-        <Swiper
-          ref={swiperRef}
-          modules={[Navigation, Autoplay, Pagination, EffectFade, Parallax]}
-          effect="fade"
-          speed={1500}
-          parallax={true}
-          slidesPerView={1}
-          navigation={{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          }}
-          pagination={{
-            clickable: true,
-            renderBullet: function (index, className) {
-              return `<span class="${className}">
-                <span class="bullet-inner">0${index + 1}</span>
-              </span>`;
-            },
-          }}
-          autoplay={{ 
-            delay: 7000,
-            disableOnInteraction: false,
-          }}
-          loop
-          onSlideChange={handleSlideChange}
-          className="hero-swiper-enhanced"
-        >
-          {slides.map((slide, index) => (
-            <SwiperSlide key={slide.id}>
-              <div className="slide-container">
-                {/* Video Background Option */}
-                {slide.video ? (
-                  <div className="video-container">
-                    <video 
-                      autoPlay 
-                      muted 
-                      loop 
-                      playsInline
-                      className="video-bg"
-                    >
-                      <source src={slide.video} type="video/mp4" />
-                    </video>
-                    <div className="video-overlay"></div>
-                  </div>
-                ) : (
-                  <>
-                    <img 
-                      src={slide.image} 
-                      alt={slide.title} 
-                      className="slide-bg" 
-                      style={{
-                        transform: `translate(${mousePosition.x}px, ${mousePosition.y}px) scale(1.1)`
-                      }}
-                    />
-                    <div className="slide-overlay"></div>
-                  </>
-                )}
-
-                {/* Animated Gradient Layer */}
-                <div className="gradient-layer"></div>
-
-                <div className="slide-content">
-                  {/* Subtle Animated Background Text */}
-                  <div 
-                    className="background-text"
-                    data-swiper-parallax="-200"
-                  >
-                    NOVA<span>4</span>MEDIA
+              {/* Main Content */}
+              <div className="slide-content-photia">
+                <div className="content-wrapper-photia">
+                  {/* Pre-title */}
+                  <div className="slide-pre-title-photia">
+                    <span className="pre-title-line"></span>
+                    <span className="pre-title-text">WELCOME TO STUDIO</span>
                   </div>
 
-                  {/* Main Content */}
-                  <div className="content-wrapper">
-                    <h6 
-                      className="slide-pre-title"
-                      data-swiper-parallax="-100"
-                    >
-                      WELCOME TO STUDIO
-                    </h6>
+                  {/* Main Title */}
+                  <h1 className="slide-title-photia">
+                    {slide.title}
+                  </h1>
+
+                  {/* Subtitle */}
+                  <h2 className="slide-subtitle-photia">
+                    {slide.subtitle}
+                  </h2>
+
+                  {/* Description */}
+                  <p className="slide-description-photia">
+                    {slide.description}
+                  </p>
+
+                  {/* Buttons */}
+                  <div className="button-group-photia">
+                    <a href="/portfolio" className="btn-primary-photia">
+                      <span>{slide.buttonText}</span>
+                      <svg className="btn-arrow-photia" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                    </a>
                     
-                    <h1 
-                      className="slide-title"
-                      data-swiper-parallax="-300"
-                    >
-                      <span className="title-line">
-                        {slide.title.split(' ').slice(0, 2).join(' ')}
-                      </span>
-                      <span className="title-line">
-                        {slide.title.split(' ').slice(2).join(' ')}
-                      </span>
-                    </h1>
-                    
-                    <p 
-                      className="slide-subtitle"
-                      data-swiper-parallax="-400"
-                    >
-                      {slide.subtitle}
-                    </p>
-
-                    <div className="button-group">
-                      <a 
-                        href="/projects" 
-                        className="btn-magnetic"
-                        data-swiper-parallax="-500"
-                      >
-                        <span className="btn-text">{slide.buttonText}</span>
-                        <span className="btn-icon">
-                          <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2"/>
-                          </svg>
-                        </span>
-                        <span className="btn-hover-bg"></span>
-                      </a>
-                      
-                      <a 
-                        href="/contactPage" 
-                        className="btn-outline-magnetic"
-                        data-swiper-parallax="-600"
-                      >
-                        <span>Contact Us</span>
-                        <span className="btn-arrow">→</span>
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Social/Info Sidebar */}
-                  <div className="slide-sidebar">
-                    <div className="social-links">
-                      <a href="#" className="social-link">FB</a>
-                      <a href="#" className="social-link">IG</a>
-                      <a href="#" className="social-link">TW</a>
-                    </div>
-                    <div className="slide-number">
-                      <span className="current">0{index + 1}</span>
-                      <span className="divider">/</span>
-                      <span className="total">0{slides.length}</span>
-                    </div>
+                    <a href="/contact" className="btn-secondary-photia">
+                      <span>Get in Touch</span>
+                      <div className="btn-line"></div>
+                    </a>
                   </div>
                 </div>
               </div>
-            </SwiperSlide>
-          ))}
 
-          {/* Custom Navigation */}
-          <div className="swiper-button-prev">
-            <div className="arrow-icon">←</div>
-            <div className="nav-text">Prev</div>
-          </div>
-          <div className="swiper-button-next">
-            <div className="nav-text">Next</div>
-            <div className="arrow-icon">→</div>
-          </div>
-        </Swiper>
+              {/* Slide Indicator */}
+              <div className="slide-indicator-photia">
+                <span className="current-slide">0{activeIndex + 1}</span>
+                <div className="indicator-line"></div>
+                <span className="total-slides">0{slides.length}</span>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
 
-        {/* Scroll Indicator with Animation */}
-        <div className="scroll-indicator-enhanced">
-          <div className="scroll-text">
-            <span>S</span>
-            <span>C</span>
-            <span>R</span>
-            <span>O</span>
-            <span>L</span>
-            <span>L</span>
-          </div>
-          <div className="scroll-line">
-            <div className="line-progress"></div>
-          </div>
+        {/* Navigation Arrows */}
+        <div className="swiper-button-prev-photia">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2"/>
+          </svg>
         </div>
-      </section>
+        <div className="swiper-button-next-photia">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2"/>
+          </svg>
+        </div>
+      </Swiper>
 
-      {/* Floating Elements (for extra wow) */}
-      <div className="floating-elements">
-        <div className="float-circle circle-1"></div>
-        <div className="float-circle circle-2"></div>
-        <div className="float-circle circle-3"></div>
+      {/* Photia-style Pagination */}
+      <div className="swiper-pagination-photia"></div>
+
+      {/* Scroll Indicator */}
+      <div className="scroll-indicator-photia">
+        <div className="scroll-line-photia"></div>
+        <span className="scroll-text-photia">SCROLL</span>
       </div>
-    </>
+    </section>
   );
 }
 
-export default HeroSliderEnhanced;
+export default HeroSlider;
