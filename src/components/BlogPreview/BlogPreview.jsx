@@ -116,14 +116,14 @@ function BlogPreview() {
           ))}
         </div>
         
-        <div className="view-all-blog">
+        {/* <div className="view-all-blog">
           <a href="/blog" className="btn-modern">
             <span>Explore All Articles</span>
             <div className="arrow-group">
               <FaArrowRight />
             </div>
           </a>
-        </div>
+        </div> */}
       </div>
     </section>
   );
