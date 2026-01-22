@@ -1,8 +1,39 @@
 // components/ContactPage/ContactPage.jsx
-import React from "react";
+import React, { useState } from "react";
 import "./ContactPage.css";
 
 function ContactPage() {
+  const [status, setStatus] = useState("idle"); 
+  // idle | loading | success | error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xykegdrw", {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        form.reset();
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
+  };
+
   return (
     <section className="contact-page">
       {/* Hero Section */}
@@ -14,6 +45,7 @@ function ContactPage() {
             videography, and creative media solutions.
           </p>
         </div>
+
         <div className="floating-shapes">
           <span className="shape circle"></span>
           <span className="shape triangle"></span>
@@ -26,22 +58,74 @@ function ContactPage() {
         {/* Contact Form */}
         <div className="contact-form">
           <h2>Send Message</h2>
-          <form>
+
+          <form onSubmit={handleSubmit}>
+            <input
+              type="hidden"
+              name="_subject"
+              value="New Contact Form Submission"
+            />
+
             <div className="form-group">
-              <input type="text" placeholder="Your Name" required />
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                required
+                disabled={status === "loading"}
+              />
             </div>
+
             <div className="form-group">
-              <input type="email" placeholder="Your Email" required />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+                disabled={status === "loading"}
+              />
             </div>
+
             <div className="form-group">
-              <input type="text" placeholder="Subject" required />
+              <input
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                required
+                disabled={status === "loading"}
+              />
             </div>
+
             <div className="form-group">
-              <textarea placeholder="Message" rows="6" required></textarea>
+              <textarea
+                name="message"
+                placeholder="Message"
+                rows="6"
+                required
+                disabled={status === "loading"}
+              ></textarea>
             </div>
-            <button type="submit" className="primary-btn">
-              Send Message
+
+            <button
+              type="submit"
+              className="primary-btn"
+              disabled={status === "loading"}
+            >
+              {status === "loading" ? "Sending..." : "Send Message"}
             </button>
+
+            {/* Status Messages */}
+            {status === "success" && (
+              <p className="form-success">
+                ✅ Your message has been sent successfully!
+              </p>
+            )}
+
+            {status === "error" && (
+              <p className="form-error">
+                ❌ Something went wrong. Please try again later.
+              </p>
+            )}
           </form>
         </div>
 
@@ -51,6 +135,7 @@ function ContactPage() {
           <p><strong>Phone:</strong> +27 11 123 4567</p>
           <p><strong>Email:</strong> info@nova4media.co.za</p>
           <p><strong>Address:</strong> 123 Nova Street, Northcliff, Johannesburg, South Africa</p>
+
           <div className="social-links">
             <a href="#">Facebook</a>
             <a href="#">Instagram</a>
