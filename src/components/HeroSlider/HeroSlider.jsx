@@ -139,7 +139,7 @@ function HeroSliderPhotiaStyle() {
                   {/* Buttons */}
                   <div className="button-group-photia">
                     <a 
-                      href="/portfolio" 
+                      href="/projects" 
                       className="btn-primary-photia"
                       aria-label={`${slide.buttonText} - Opens portfolio page`}
                     >
