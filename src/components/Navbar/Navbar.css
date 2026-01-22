@@ -29,26 +29,18 @@
   max-width: 1320px;
   margin: auto;
   padding: 16px 36px;
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.06),
-    rgba(0,0,0,0.65)
-  );
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.65));
   backdrop-filter: blur(18px);
   border-radius: 90px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  box-shadow:
-    0 30px 80px rgba(0,0,0,0.55),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
   border: 1px solid var(--glass-border);
   transition: all 0.45s ease;
+  position: relative; /* for mobile toggle */
 }
 
-/* Slight shrink on scroll */
 .navbar.scrolled .nav-container {
   padding: 12px 34px;
   transform: scale(0.985);
@@ -148,26 +140,16 @@
   padding: 14px 0;
   border-radius: 18px;
   min-width: 240px;
-
-  box-shadow:
-    0 30px 70px rgba(0, 0, 0, 0.75),
-    inset 0 1px 0 rgba(255,255,255,0.06);
-
+  box-shadow: 0 30px 70px rgba(0,0,0,0.75), inset 0 1px 0 rgba(255,255,255,0.06);
   backdrop-filter: blur(14px);
-  animation: dropdownFade 0.4s ease forwards;
   overflow: hidden;
   z-index: 1001;
+  max-height: 0;
+  transition: max-height 0.35s ease;
 }
 
-@keyframes dropdownFade {
-  from {
-    opacity: 0;
-    transform: translateY(14px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.dropdown-menu.open {
+  max-height: 400px; /* Adjust if more items */
 }
 
 .dropdown-item {
@@ -229,7 +211,7 @@
 }
 
 /* =========================
-   MOBILE
+   MOBILE TOGGLE
 ========================= */
 .mobile-toggle {
   display: none;
@@ -238,12 +220,21 @@
   color: #fff;
   font-size: 26px;
   cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  z-index: 1001;
 }
 
 /* =========================
    MOBILE LAYOUT
 ========================= */
 @media (max-width: 900px) {
+  .navbar {
+    top: 0 !important;
+  }
+
   .nav-container {
     border-radius: 26px;
     padding: 16px 22px;
@@ -261,22 +252,25 @@
     border-radius: 26px;
     display: none;
     gap: 26px;
-    animation: mobileFade 0.35s ease;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
   }
 
   .nav-links.open {
     display: flex;
   }
 
-  @keyframes mobileFade {
-    from {
-      opacity: 0;
-      transform: translateY(-14px) scale(0.96);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+  .dropdown-menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    border-radius: 18px;
+    background: rgba(0,0,0,0.95);
+  }
+
+  .dropdown-menu.open {
+    max-height: 400px;
   }
 
   .cta-group {

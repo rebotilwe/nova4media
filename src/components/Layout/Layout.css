@@ -1,10 +1,8 @@
-/* Layout.css */
 .app-layout {
   min-height: 100vh;
   position: relative;
 }
 
-/* When preloader is active */
 body.loading {
   overflow: hidden;
   height: 100vh;
@@ -14,7 +12,6 @@ body.loaded {
   overflow: auto;
 }
 
-/* Main content states */
 .main-content {
   opacity: 0;
   visibility: hidden;
@@ -26,24 +23,19 @@ body.loaded {
   visibility: visible;
 }
 
-/* Prevent flash of unstyled content */
 .app-layout {
   opacity: 0;
   animation: fadeIn 0.3s ease 0.1s forwards;
 }
 
 @keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+  to { opacity: 1; }
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Ensure proper stacking */
 .preloader {
   z-index: 9999;
 }
@@ -52,9 +44,30 @@ html {
   z-index: 1000;
 }
 
-/* Fix for iOS Safari scrolling */
-@supports (-webkit-touch-callout: none) {
-  body {
-    -webkit-overflow-scrolling: touch;
+/* Dynamic navbar offset for main content */
+main {
+  padding-top: clamp(140px, 15vw, 180px);
+  min-height: calc(100vh - 140px);
+  transition: padding-top 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 900px) {
+  main {
+    padding-top: clamp(90px, 12vw, 120px);
   }
+}
+
+.navbar.scrolled main {
+  padding-top: clamp(80px, 8vw, 100px);
+}
+
+@media (max-width: 900px) {
+  .navbar.scrolled main {
+    padding-top: clamp(60px, 8vw, 80px);
+  }
+}
+
+/* iOS Safari scroll fix */
+@supports (-webkit-touch-callout: none) {
+  body { -webkit-overflow-scrolling: touch; }
 }
