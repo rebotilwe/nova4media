@@ -24,7 +24,7 @@ const slides = [
     title: "Creative Vision",
     subtitle: "Transforming scenes into memories",
     description: "Bringing your creative ideas to life with professional expertise",
-    buttonText: "Our Services",
+    // buttonText: "Our Services",
     accentColor: "#c9a96e"
   },
   {
@@ -210,5 +210,4 @@ function HeroSliderPhotiaStyle() {
     </section>
   );
 }
-
 export default HeroSliderPhotiaStyle;
