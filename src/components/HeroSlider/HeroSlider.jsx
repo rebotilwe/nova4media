@@ -1,5 +1,6 @@
-// HeroSliderPhotiaStyle.jsx - FINAL VERSION
-import { useState, useRef } from "react";
+// HeroSliderPhotiaStyle.jsx - FINAL VERSION (UPDATED)
+import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Pagination, EffectFade } from "swiper/modules";
 import "swiper/css";
@@ -24,7 +25,6 @@ const slides = [
     title: "Creative Vision",
     subtitle: "Transforming scenes into memories",
     description: "Bringing your creative ideas to life with professional expertise",
-    // buttonText: "Our Services",
     accentColor: "#c9a96e"
   },
   {
@@ -38,7 +38,7 @@ const slides = [
   },
 ];
 
-function HeroSliderPhotiaStyle() {
+function HeroSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
 
@@ -46,7 +46,7 @@ function HeroSliderPhotiaStyle() {
     setActiveIndex(swiper.realIndex);
   };
 
-  // Preload next image for smoother transitions
+  // Preload next images for smoother transitions
   const preloadImages = () => {
     slides.forEach((slide, index) => {
       const nextIndex = (index + 1) % slides.length;
@@ -55,8 +55,8 @@ function HeroSliderPhotiaStyle() {
     });
   };
 
-  // Preload images on mount
-  useState(() => {
+  // ✅ Correct hook usage
+  useEffect(() => {
     preloadImages();
   }, []);
 
@@ -69,22 +69,22 @@ function HeroSliderPhotiaStyle() {
         speed={1200}
         slidesPerView={1}
         navigation={{
-          nextEl: '.swiper-button-next-photia',
-          prevEl: '.swiper-button-prev-photia',
+          nextEl: ".swiper-button-next-photia",
+          prevEl: ".swiper-button-prev-photia",
         }}
         pagination={{
           clickable: true,
-          el: '.swiper-pagination-photia',
-          bulletClass: 'photia-bullet',
-          bulletActiveClass: 'photia-bullet-active',
+          el: ".swiper-pagination-photia",
+          bulletClass: "photia-bullet",
+          bulletActiveClass: "photia-bullet-active",
           renderBullet: function (index, className) {
             return `<span class="${className}" aria-label="Go to slide ${index + 1}"></span>`;
           },
         }}
-        autoplay={{ 
+        autoplay={{
           delay: 8000,
           disableOnInteraction: false,
-          pauseOnMouseEnter: true, // Pause on hover for better UX
+          pauseOnMouseEnter: true,
         }}
         loop
         onSlideChange={handleSlideChange}
@@ -95,8 +95,8 @@ function HeroSliderPhotiaStyle() {
             <div className="slide-container-photia">
               {/* Background Image */}
               <div className="image-background">
-                <img 
-                  src={slide.image} 
+                <img
+                  src={slide.image}
                   alt={slide.title}
                   className="slide-bg-photia"
                   loading={index === 0 ? "eager" : "lazy"}
@@ -105,100 +105,108 @@ function HeroSliderPhotiaStyle() {
                 <div className="gradient-overlay-photia" aria-hidden="true"></div>
               </div>
 
-              {/* Subtle Branding */}
+              {/* Branding */}
               <div className="brand-watermark" aria-hidden="true">
                 <span className="brand-text">NOVA</span>
                 <span className="brand-number">4</span>
                 <span className="brand-text">MEDIA</span>
               </div>
 
-              {/* Main Content */}
+              {/* Content */}
               <div className="slide-content-photia">
                 <div className="content-wrapper-photia">
-                  {/* Pre-title */}
                   <div className="slide-pre-title-photia">
                     <span className="pre-title-line" aria-hidden="true"></span>
                     <span className="pre-title-text">WELCOME TO STUDIO</span>
                   </div>
 
-                  {/* Main Title */}
-                  <h1 className="slide-title-photia">
-                    {slide.title}
-                  </h1>
+                  <h1 className="slide-title-photia">{slide.title}</h1>
+                  <h2 className="slide-subtitle-photia">{slide.subtitle}</h2>
 
-                  {/* Subtitle */}
-                  <h2 className="slide-subtitle-photia">
-                    {slide.subtitle}
-                  </h2>
-
-                  {/* Description */}
                   <p className="slide-description-photia">
                     {slide.description}
                   </p>
 
                   {/* Buttons */}
                   <div className="button-group-photia">
-                    <a 
-                      href="/projects" 
+                    <Link
+                      to="/projects"
                       className="btn-primary-photia"
                       aria-label={`${slide.buttonText} - Opens portfolio page`}
                     >
                       <span>{slide.buttonText}</span>
-                      <svg 
-                        className="btn-arrow-photia" 
-                        viewBox="0 0 24 24" 
+                      <svg
+                        className="btn-arrow-photia"
+                        viewBox="0 0 24 24"
                         fill="none"
                         aria-hidden="true"
                       >
-                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2"/>
+                        <path
+                          d="M5 12H19M19 12L12 5M19 12L12 19"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        />
                       </svg>
-                    </a>
-                    
-                    <a 
-                      href="/contact" 
+                    </Link>
+
+                    <Link
+                      to="/contactPage"
                       className="btn-secondary-photia"
                       aria-label="Get in Touch - Opens contact page"
                     >
                       <span>Get in Touch</span>
                       <div className="btn-line" aria-hidden="true"></div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
 
               {/* Slide Indicator */}
               <div className="slide-indicator-photia" aria-hidden="true">
-                <span className="current-slide">0{activeIndex + 1}</span>
+                <span className="current-slide">
+                  0{activeIndex + 1}
+                </span>
                 <div className="indicator-line"></div>
-                <span className="total-slides">0{slides.length}</span>
+                <span className="total-slides">
+                  0{slides.length}
+                </span>
               </div>
             </div>
           </SwiperSlide>
         ))}
 
-        {/* Navigation Arrows */}
-        <button 
+        {/* Navigation */}
+        <button
           className="swiper-button-prev-photia"
           aria-label="Previous slide"
         >
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2"/>
+            <path
+              d="M15 18L9 12L15 6"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
           </svg>
         </button>
-        <button 
+
+        <button
           className="swiper-button-next-photia"
           aria-label="Next slide"
         >
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2"/>
+            <path
+              d="M9 18L15 12L9 6"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
           </svg>
         </button>
       </Swiper>
 
       {/* Pagination */}
-      <div 
-        className="swiper-pagination-photia" 
-        role="navigation" 
+      <div
+        className="swiper-pagination-photia"
+        role="navigation"
         aria-label="Slide navigation"
       ></div>
 
@@ -210,4 +218,5 @@ function HeroSliderPhotiaStyle() {
     </section>
   );
 }
-export default HeroSliderPhotiaStyle;
+
+export default HeroSlider;
