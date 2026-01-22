@@ -29,6 +29,10 @@ function Navbar() {
     setActiveDropdown(null);
   };
 
+  const toggleDropdown = (dropdown) => {
+    setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
+  };
+
   return (
     <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="nav-container">
@@ -44,9 +48,10 @@ function Navbar() {
           <div className="dropdown">
             <button
               className="dropdown-toggle"
-              onClick={() => setActiveDropdown(activeDropdown === "pages" ? null : "pages")}
+              onClick={() => toggleDropdown("pages")}
+              aria-expanded={activeDropdown === "pages"}
             >
-              Pages ▾
+              Pages <span className="dropdown-arrow">▾</span>
             </button>
 
             <div className={`dropdown-menu ${activeDropdown === "pages" ? "open" : ""}`}>
@@ -57,6 +62,13 @@ function Navbar() {
 
           <Link to="/pricing" className={location.pathname === "/pricing" ? "active" : ""} onClick={closeMobile}>Pricing</Link>
           <Link to="/contactPage" className={location.pathname === "/contactPage" ? "active" : ""} onClick={closeMobile}>Contact Us</Link>
+
+          {/* Mobile CTA */}
+          {isMobileOpen && (
+            <div className="mobile-cta">
+              <Link to="/contact" className="lets-talk-btn" onClick={closeMobile}>LET'S TALK</Link>
+            </div>
+          )}
         </nav>
 
         <div className="cta-group">
@@ -64,7 +76,7 @@ function Navbar() {
           <button className="arrow-btn" aria-label="Open">→</button>
         </div>
 
-        <button className="mobile-toggle" onClick={toggleMobile} aria-label="Toggle Menu">
+        <button className="mobile-toggle" onClick={toggleMobile} aria-label={isMobileOpen ? "Close Menu" : "Open Menu"}>
           {isMobileOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
