@@ -1,8 +1,8 @@
 import React from "react";
 import "./Footer.css";
-import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaInstagram } from "react-icons/fa"; // removed unused icons
 import logo from "../../assets/images/logo5.jpg";
-
+import { SiTiktok, SiYoutube } from "react-icons/si"; // TikTok and YouTube icons
 function Footer() {
   return (
     <footer className="footer">
@@ -31,11 +31,36 @@ function Footer() {
           </p>
 
           <div className="footer-socials">
-            <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaInstagram /></a>
-            <a href="#"><FaTwitter /></a>
-            <a href="#"><FaLinkedinIn /></a>
-          </div>
+  <a 
+    href="https://www.facebook.com/profile.php?id=100093254215121" 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <FaFacebookF />
+  </a>
+  <a 
+    href="https://www.instagram.com/nova4media/" 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <FaInstagram />
+  </a>
+  <a 
+    href="https://www.tiktok.com/@nova4mediasa" 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <SiTiktok />
+  </a>
+  <a 
+    href="https://www.youtube.com/@nova4media" 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <SiYoutube />
+  </a>
+</div>
+
         </div>
 
         {/* Quick Links */}

@@ -1,6 +1,8 @@
 // components/ContactPage/ContactPage.jsx
 import React, { useState } from "react";
 import "./ContactPage.css";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { SiTiktok, SiYoutube } from "react-icons/si";
 
 function ContactPage() {
   const [status, setStatus] = useState("idle"); 
@@ -137,9 +139,38 @@ function ContactPage() {
           <p><strong>Address:</strong> 123 Nova Street, Northcliff, Johannesburg, South Africa</p>
 
           <div className="social-links">
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">LinkedIn</a>
+            <a 
+              href="https://www.facebook.com/profile.php?id=100093254215121" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="Facebook"
+            >
+              <FaFacebookF />
+            </a>
+            <a 
+              href="https://www.instagram.com/nova4media/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="Instagram"
+            >
+              <FaInstagram />
+            </a>
+            <a 
+              href="https://www.tiktok.com/@nova4mediasa" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="TikTok"
+            >
+              <SiTiktok />
+            </a>
+            <a 
+              href="https://www.youtube.com/@nova4media" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="YouTube"
+            >
+              <SiYoutube />
+            </a>
           </div>
         </div>
       </div>

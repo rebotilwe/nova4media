@@ -177,3 +177,21 @@
     transform: translateY(0);
   }
 }
+.contact-details .social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #4a6fa8;
+  color: #fff;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.contact-details .social-links a:hover {
+  transform: scale(1.1);
+  background: #7f9cf5;
+}
